@@ -1,32 +1,30 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const userSchema = new Schema({
-    email: {
+const tickerSchema = new Schema({
+    symbol: {
         type: String,
         required: true,
         unique: true,
     },
-    password: {
+    fullName: {
         type: String,
     },
-    profilePicture: {
+    logo: {
         type: String,
         default:
             'https://upload.wikimedia.org/wikipedia/commons/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg',
     },
-    visits: {
-        typte: String,
+    count: {
+        type: Number,
+        default: 1
     },
-    lastVisits: {
-        type:String
+    visitors: {
+        type: String
     },
-    openTrades:{
+    comments:{
         type: Array
-    },
-    closedTrades:{
-        type:Array
     }
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Ticker', tickerSchema)
