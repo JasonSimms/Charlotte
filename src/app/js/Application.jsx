@@ -13,6 +13,7 @@ import Searchbar from './Searchbar'
 import Chart from './Chart'
 
 
+
 class Application extends React.Component {
     constructor(props) {
         super(props)
@@ -34,6 +35,10 @@ class Application extends React.Component {
 
     componentDidMount() {
         this._setUser()
+        axios.get(
+            `https://api.iextrading.com/1.0/stock/f/batch?types=quote,news,chart&range=1m&last=10`)
+            .then(result => this.setState({data: result}))
+            console.log(this.state)
     }
 
     render() {
@@ -48,7 +53,10 @@ class Application extends React.Component {
                                     
                     />
                     <Switch>
-                        <Route exact path="/chart" render={() => <Chart stock={this.state.stock} />} />
+                        <Route exact path="/chart" render={() => <Chart 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        />} />
                         <Route exact path="/" render={() => <Home user={this.state.user} />} />
                         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
                         <Route
@@ -83,13 +91,26 @@ class Application extends React.Component {
     _searchItems(event) {
         let x = this.state.query;
         event.preventDefault();
-        console.log("::app/js/Application searchItems", x);
+        // console.log("::app/js/Application searchItems", x);
         //API IS NOT CASE SENSITIVE
-        this.setState({
-            stock: x,
-        })
-        console.log(this.state)
-      }
+        axios.get(
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=quote,news,chart&range=1m&last=10`)
+            .then(result =>   {
+                // console.log(result.data.chart[0].open)
+                this.setState({
+                    data: result.data,
+                })
+                console.log(this.state)
+            })
+            // .then(()=>{
+
+            // })
+            .catch(err => console.log(err))
+        }
+
+
+
+
       _handleSearchChange(value) {
         this.setState({
             query: value,
