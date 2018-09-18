@@ -19,11 +19,17 @@ class Application extends React.Component {
 
         this.state = {
             user: this._setUser(true),
-            stock: "aapl"
+            query: "",
+            stock: "aapl",
+            data: ""
         }
 
         this._setUser = this._setUser.bind(this)
         this._resetUser = this._resetUser.bind(this)
+        this._searchItems = this._searchItems.bind(this);
+    this._handleSearchChange = this._handleSearchChange.bind(this);
+        
+
     }
 
     componentDidMount() {
@@ -35,7 +41,12 @@ class Application extends React.Component {
             <BrowserRouter>
                 <div>
                     <Navigation user={this.state.user} />
-                    <Searchbar user={this.state.user} />
+                    <Searchbar 
+                   search={this.state.query}
+                   handleSearchChange={this._handleSearchChange}
+                   searchItems={this._searchItems}
+                                    
+                    />
                     <Switch>
                         <Route exact path="/chart" render={() => <Chart stock={this.state.stock} />} />
                         <Route exact path="/" render={() => <Home user={this.state.user} />} />
@@ -68,6 +79,23 @@ class Application extends React.Component {
             return null
         }
     }
+
+    _searchItems(event) {
+        let x = this.state.query;
+        event.preventDefault();
+        console.log("::app/js/Application searchItems", x);
+        //API IS NOT CASE SENSITIVE
+        this.setState({
+            stock: x,
+        })
+        console.log(this.state)
+      }
+      _handleSearchChange(value) {
+        this.setState({
+            query: value,
+        })
+        console.log(this.state.query)
+      }
 }
 
 export default Application

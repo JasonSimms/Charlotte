@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom'
 const Searchbar = props => {
     return (
         <div className="container nav-content">
-         <form action="">
-         <input type="text" placeholder="Search NASDAQ Tickers"/>
-         <button type="submit">$</button>
-         </form>
+         <form className="search" onSubmit={props.searchItems}>
+            <input
+                className="input"
+                value={props.query}
+                onChange={event => props.handleSearchChange(event.target.value)}
+                type="text"
+                placeholder="name"
+            />
+            <input type="submit" className="button" value="$" />
+        </form>
          <button className="favorite">
          Fav 1
          </button>
