@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    displayName: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,
@@ -10,22 +13,20 @@ const userSchema = new Schema({
     password: {
         type: String,
     },
-    profilePicture: {
-        type: String,
-        default:
-            'https://upload.wikimedia.org/wikipedia/commons/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg',
+    history: {
+        typte: Array,
     },
-    visits: {
-        typte: String,
-    },
-    lastVisits: {
-        type:String
+    points: {
+        type:Number
     },
     openTrades:{
         type: Array
     },
     closedTrades:{
         type:Array
+    },
+    favorites: {
+        type: Array
     }
 })
 
