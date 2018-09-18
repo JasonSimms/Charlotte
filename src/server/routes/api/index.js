@@ -18,19 +18,15 @@ router.get('/protected', checkLoggedIn, (req, res) => {
 
 router.use('/auth', authRoutes)
 
-//CREATING TICKERS VIA POST
-test=[{
-    symbol: "iroasdfasdfn",
-    companyName: "Ironhadfasdack"
-}]
 
 router.post('/tickertest', (req, res) => {
-    Ticker.create(test, err => {
-        if (err) {
-          throw err;
-        }
-      })
-    console.log('Ticker created?')
+    const { symbol } = req.body
+    console.log(`tick here: `,req.body.visitor._id)
+    Ticker.findOneAndUpdate({ symbol }, {$inc:{visits: 1}, $addToSet:{visitors: req.body.visitor}})
+    .then(existingTicker => {
+        if(!existingTicker)return new Ticker(req.body).save()
+    })
+    console.log('Ticker created?',req.body.symbol)
 })
 
 router.use((req, res) => {

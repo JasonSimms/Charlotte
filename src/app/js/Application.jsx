@@ -14,6 +14,8 @@ import Chart from './Chart'
 
 
 
+
+
 class Application extends React.Component {
     constructor(props) {
         super(props)
@@ -94,18 +96,19 @@ class Application extends React.Component {
         // console.log("::app/js/Application searchItems", x);
         //API IS NOT CASE SENSITIVE
         axios.get(
-            `https://api.iextrading.com/1.0/stock/${x}/batch?types=quote,news,chart&range=1m&last=10`)
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo`)
             .then(result =>   {
-                // console.log(result.data.chart[0].open)
+                console.log(result.data)
                 this.setState({
                     data: result.data,
+                    stock: result.data.company.symbol,
                 })
-                console.log(this.state)
+                console.log(this.state.data.company.companyName,`current stock`)
             })
-            // .then(()=>{
-
-            // })
-            .catch(err => console.log(err))
+            .then(api.post(
+                        `/api/tickertest`,
+                        { symbol: this.state.stock, companyName:this.state.data.company.companyName, logo:this.state.data.logo.url, visitor:this.state.user},
+                            ).catch(err => console.log(err)))
         }
 
 
@@ -115,7 +118,6 @@ class Application extends React.Component {
         this.setState({
             query: value,
         })
-        console.log(this.state.query)
       }
 }
 
