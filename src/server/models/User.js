@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
+    displayName: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,
@@ -10,17 +13,20 @@ const userSchema = new Schema({
     password: {
         type: String,
     },
-    visits: {
-        typte: String,
+    history: {
+        typte: Array,
     },
-    lastVisits: {
-        type:String
+    points: {
+        type:Number
     },
     openTrades:{
         type: Array
     },
     closedTrades:{
         type:Array
+    },
+    favorites: {
+        type: Array
     }
 })
 

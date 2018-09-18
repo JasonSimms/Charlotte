@@ -14,6 +14,7 @@ class Auth extends Component {
         super(props)
 
         this.state = {
+            displayName: '',
             email: '',
             password: '',
             error: '',
@@ -76,7 +77,7 @@ class Auth extends Component {
 
         api.post(
             `/api/auth/sign-${type}`,
-            { email: this.state.email, password: this.state.password },
+            { email: this.state.email, password: this.state.password, displayName: this.state.displayName},
         )
             .then(data => {
                 localStorage.setItem('identity', data.token)

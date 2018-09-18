@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const tickerSchema = new Schema({
-    ACTSymbol: {
+    Symbol: {
         type: String,
         required: true,
         unique: true,
@@ -10,12 +10,12 @@ const tickerSchema = new Schema({
     companyName: {
         type: String,
     },
-    // logo: {
-    //     type: String,
-    //     default:
-    //         'https://upload.wikimedia.org/wikipedia/commons/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg',
-    // },
-    count: {
+    logo: {
+        type: String,
+        default:
+            "../public/stockicon.png",
+    },
+    visits: {
         type: Number,
         default: 0
     },
@@ -24,6 +24,9 @@ const tickerSchema = new Schema({
     },
     comments:{
         type: Array
+    },
+    earnings:{
+        type: String
     }
 })
 
