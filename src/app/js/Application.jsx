@@ -10,6 +10,8 @@ import Profile from './Profile'
 import NotFound from './NotFound'
 import api from './utils/api'
 import Searchbar from './Searchbar'
+import Chart from './Chart'
+
 
 class Application extends React.Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class Application extends React.Component {
 
         this.state = {
             user: this._setUser(true),
+            stock: "aapl"
         }
 
         this._setUser = this._setUser.bind(this)
@@ -34,6 +37,7 @@ class Application extends React.Component {
                     <Navigation user={this.state.user} />
                     <Searchbar user={this.state.user} />
                     <Switch>
+                        <Route exact path="/chart" render={() => <Chart stock={this.state.stock} />} />
                         <Route exact path="/" render={() => <Home user={this.state.user} />} />
                         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
                         <Route
