@@ -19,10 +19,7 @@ router.post('/sign-up', (req, res) => {
             return new User({ email, password: hashedPassword}).save()
         })
         .then(user => {
-            const token = jwt.sign(
-                { _id: user._id, email: user.email,},
-                config.SECRET_JWT_PASSPHRASE
-            )
+            const token = createUserToken(user)
             res.send({ token })
         })
 })
@@ -39,15 +36,22 @@ router.post('/sign-in', (req, res) => {
 
         if (!passwordsMatch) return res.status(400).send({ error: 'Password is incorrect.' })
 
-        const token = jwt.sign(
-            {
-                _id: existingUser._id,
-                email: existingUser.email,
-            },
-            config.SECRET_JWT_PASSPHRASE
-        )
+        const token = createUserToken(existingUser)
+        
         res.send({ token })
     })
 })
+
+function createUserToken(user) {
+    const u = typeof user.toObject === "function" ? user.toObject() : user
+
+    delete u.password
+    const token = jwt.sign(
+        u,
+        config.SECRET_JWT_PASSPHRASE
+    )
+
+    return token
+}
 
 module.exports = router

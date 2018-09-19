@@ -23,7 +23,7 @@ class Application extends React.Component {
         this.state = {
             user: this._setUser(true),
             query: "",
-            stock: "aapl",
+            stock: "SPY",
             data: ""
         }
 
@@ -38,7 +38,7 @@ class Application extends React.Component {
     componentDidMount() {
         this._setUser()
         axios.get(
-            `https://api.iextrading.com/1.0/stock/f/batch?types=quote,news,chart&range=1m&last=10`)
+            `https://api.iextrading.com/1.0/stock/spy/batch?types=quote,news,chart&range=1m&last=10`)
             .then(result => this.setState({data: result}))
             console.log(this.state)
     }
@@ -104,11 +104,18 @@ class Application extends React.Component {
                     stock: result.data.company.symbol,
                 })
                 console.log(this.state.data.company.companyName,`current stock`)
+
+                return api.post(
+                    `/api/search`,
+                    { symbol: this.state.stock, companyName:this.state.data.company.companyName, logo:this.state.data.logo.url, visitor:this.state.user},
+                        )
             })
-            .then(api.post(
-                        `/api/tickertest`,
-                        { symbol: this.state.stock, companyName:this.state.data.company.companyName, logo:this.state.data.logo.url, visitor:this.state.user},
-                            ).catch(err => console.log(err)))
+            .then(result => {
+                // do something here with api result
+                // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
+                // this._setUser()
+            })
+            .catch(err => console.log(err))
         }
 
 
