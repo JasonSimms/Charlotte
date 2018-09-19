@@ -12,6 +12,8 @@ import api from './utils/api'
 import Searchbar from './Searchbar'
 import Chart from './Chart'
 import Trends from './Trends'
+import Advisor from './Advisor'
+
 
 
 
@@ -26,7 +28,8 @@ class Application extends React.Component {
             user: this._setUser(true),
             query: "",
             stock: "F",
-            data: ""
+            data: "",
+            test: ""
         }
 
         this._setUser = this._setUser.bind(this)
@@ -40,26 +43,35 @@ class Application extends React.Component {
 
     componentDidMount() {
         this._setUser()
-        this._initStock("vz")
+        this._initStock("spy")
     }
     
     render() {
         return (
             <BrowserRouter>
                 <div>
-                    <Navigation user={this.state.user} />
+                    <Navigation user={this.state.user}
+                        stock={this.state.stock} 
+                        />
                     <Searchbar 
                    search={this.state.query}
                    handleSearchChange={this._handleSearchChange}
                    searchItems={this._searchItems}
+                   stock={this.state.stock} 
+
                                     
                     />
                     <Switch>
-                        <Route exact path="/chart" render={() => <Chart 
+                        <Route path="/chart/:id" render={() => <Chart 
                         stock={this.state.stock} 
                         data={this.state.data}
                         />} />
-                        <Route exact path="/trends" render={() => <Trends 
+                        <Route path="/trends" render={() => <Trends 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        initStock={this._initStock}
+                        />} />
+                        <Route path="/roboadvisor" render={() => <Advisor 
                         stock={this.state.stock} 
                         data={this.state.data}
                         />} />
@@ -103,11 +115,21 @@ class Application extends React.Component {
             `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news`)
             .then(result =>   {
                 console.log(result.data)
-                this.setState({
-                    data: result.data,
-                    stock: result.data.company.symbol,
-                })
-                console.log(this.state.data.company.companyName,`current stock`)
+                
+                localStorage.setItem( "thing", JSON.stringify(result.data))
+                    this.setState({
+                        data: result.data,
+                        stock: result.data.company.symbol,
+                    })
+                // this.setState({ data: 
+                //     // JSON.parse(
+                //         localStorage.getItem("thing")
+                //         // )
+                //     })
+                
+
+
+                console.log(this.state.data,`Searched Successful`)
 //COULD RENDER CHARTS HERE:
 //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                
                 return api.post(

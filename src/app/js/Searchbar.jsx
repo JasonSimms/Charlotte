@@ -12,9 +12,9 @@ const Searchbar = props => {
                 type="text"
                 placeholder="name"
             />
-            {/* <Link to="/chart"> */}
-            <input type="submit" className="button" value="$"  />
-                            {/* </Link> */}
+            <Link className="link" to={`/chart/${props.stock}`}>
+            <button type="submit" className="button" value="$">$</button>
+            </Link>
         </form>
          <button className="favorite">
          Fav 1

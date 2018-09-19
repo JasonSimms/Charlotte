@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { PromiseProvider } from "mongoose";
 
 const Trends = props => {
+    if(!props.data)this.initstock("SPY")
+      console.log(`Trends Component sees: `, props.data);
   let news = props.data.news;
   console.log(news);
   const mappedNews = news.map((el,i) => {
     return <li key={i}>{el.headline}</li>;
   });
-//   console.log(`Trends Component sees: `, props.data);
   return (
     <div className="container">
       <h2>
