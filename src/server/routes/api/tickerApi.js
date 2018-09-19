@@ -17,7 +17,6 @@ router.post('/', (req, res) => {
         if(!existingTicker)return new Ticker(req.body).save()
     })
     console.log('Ticker created?',req.body.symbol)
-
     // res.send({
     //     info,
     //     token: generateUserToken()

@@ -11,6 +11,8 @@ import NotFound from './NotFound'
 import api from './utils/api'
 import Searchbar from './Searchbar'
 import Chart from './Chart'
+import Trends from './Trends'
+
 
 
 
@@ -23,26 +25,24 @@ class Application extends React.Component {
         this.state = {
             user: this._setUser(true),
             query: "",
-            stock: "SPY",
+            stock: "F",
             data: ""
         }
 
         this._setUser = this._setUser.bind(this)
         this._resetUser = this._resetUser.bind(this)
         this._searchItems = this._searchItems.bind(this);
-    this._handleSearchChange = this._handleSearchChange.bind(this);
+    this._handleSearchChange = this._handleSearchChange.bind(this)
+    this._initStock = this._initStock.bind(this)
         
 
     }
 
     componentDidMount() {
         this._setUser()
-        axios.get(
-            `https://api.iextrading.com/1.0/stock/spy/batch?types=quote,news,chart&range=1m&last=10`)
-            .then(result => this.setState({data: result}))
-            console.log(this.state)
+        this._initStock("vz")
     }
-
+    
     render() {
         return (
             <BrowserRouter>
@@ -56,6 +56,10 @@ class Application extends React.Component {
                     />
                     <Switch>
                         <Route exact path="/chart" render={() => <Chart 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        />} />
+                        <Route exact path="/trends" render={() => <Trends 
                         stock={this.state.stock} 
                         data={this.state.data}
                         />} />
@@ -96,7 +100,7 @@ class Application extends React.Component {
         // console.log("::app/js/Application searchItems", x);
         //API IS NOT CASE SENSITIVE
         axios.get(
-            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo`)
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news`)
             .then(result =>   {
                 console.log(result.data)
                 this.setState({
@@ -104,18 +108,19 @@ class Application extends React.Component {
                     stock: result.data.company.symbol,
                 })
                 console.log(this.state.data.company.companyName,`current stock`)
-
+//COULD RENDER CHARTS HERE:
+//HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                
                 return api.post(
                     `/api/search`,
                     { symbol: this.state.stock, companyName:this.state.data.company.companyName, logo:this.state.data.logo.url, visitor:this.state.user},
-                        )
-            })
-            .then(result => {
-                // do something here with api result
-                // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
-                // this._setUser()
-            })
-            .catch(err => console.log(err))
+                    )
+                })
+                .then(result => {
+                    // do something here with api result
+                    // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
+                    // this._setUser()
+                })
+                .catch(err => console.log(err))
         }
 
 
@@ -126,6 +131,18 @@ class Application extends React.Component {
             query: value,
         })
       }
+
+      _initStock(z) {
+          axios.get(
+              `https://api.iextrading.com/1.0/stock/${z}/batch?types=company,logo,news`)
+              .then(result =>   {
+                  this.setState({
+                      data: result.data,
+                      stock: z,
+                    })
+                    console.log(`init fired`,z)
+                })
+            }
 }
 
 export default Application

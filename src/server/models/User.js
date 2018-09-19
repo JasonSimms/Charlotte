@@ -13,17 +13,8 @@ const userSchema = new Schema({
     password: {
         type: String,
     },
-    history: {
-        typte: Array,
-    },
     points: {
         type:Number
-    },
-    openTrades:{
-        type: Array
-    },
-    closedTrades:{
-        type:Array
     },
     favorites: {
         type: Array
