@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, browserHistory } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 
 import Auth from './Auth'
@@ -27,9 +27,10 @@ class Application extends React.Component {
         this.state = {
             user: this._setUser(true),
             query: "",
-            stock: "F",
+            stock: "",
             data: "",
-            test: ""
+            test: "",
+            chart: "",
         }
 
         this._setUser = this._setUser.bind(this)
@@ -37,18 +38,26 @@ class Application extends React.Component {
         this._searchItems = this._searchItems.bind(this);
     this._handleSearchChange = this._handleSearchChange.bind(this)
     this._initStock = this._initStock.bind(this)
+    this._refreshHandle = this._refreshHandle.bind(this)
+
         
 
     }
 
     componentDidMount() {
         this._setUser()
-        this._initStock("spy")
+        if(this.state.data == ""){
+            this._refreshHandle()
+        }
+        // this._initStock("spy")
+        // const res =  this._refreshHandle("spy")
     }
     
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter 
+            // history={browserHistory}
+            >
                 <div>
                     <Navigation user={this.state.user}
                         stock={this.state.stock} 
@@ -61,19 +70,25 @@ class Application extends React.Component {
 
                                     
                     />
-                    <Switch>
-                        <Route path="/chart/:id" render={() => <Chart 
+                    <Switch >
+                        <Route path="/chart" render={() => <Chart 
                         stock={this.state.stock} 
                         data={this.state.data}
+                        refresh={this._refreshHandle}
+
                         />} />
                         <Route path="/trends" render={() => <Trends 
                         stock={this.state.stock} 
                         data={this.state.data}
                         initStock={this._initStock}
+                        refresh={this._refreshHandle}
+
                         />} />
                         <Route path="/roboadvisor" render={() => <Advisor 
                         stock={this.state.stock} 
                         data={this.state.data}
+                        refresh={this._refreshHandle}
+
                         />} />
                         <Route exact path="/" render={() => <Home user={this.state.user} />} />
                         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
@@ -108,26 +123,28 @@ class Application extends React.Component {
 
     _searchItems(event) {
         let x = this.state.query;
+        console.log(x)
         event.preventDefault();
         // console.log("::app/js/Application searchItems", x);
         //API IS NOT CASE SENSITIVE
         axios.get(
-            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news`)
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news,chart&range=1m&last=10`)
             .then(result =>   {
                 console.log(result.data)
-                
-                localStorage.setItem( "thing", JSON.stringify(result.data))
-                    this.setState({
-                        data: result.data,
-                        stock: result.data.company.symbol,
-                    })
+                localStorage.setItem( "thing", JSON.stringify(result.data.company.symbol))
+                this.setState({
+                    data: result.data,
+                    stock: result.data.company.symbol,
+                    chart: result.data.chart,
+                })
+                // browserHistory.push(`{/chart/${props.stock}}`)
                 // this.setState({ data: 
                 //     // JSON.parse(
                 //         localStorage.getItem("thing")
                 //         // )
                 //     })
-                this.props.history.push('/')
-                console.log(this.state.data,`Searched Successful`)
+                console.log(this.state.data.company.companyName,`Search Success`)
+
 //COULD RENDER CHARTS HERE:
 //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                
                 return api.post(
@@ -142,6 +159,25 @@ class Application extends React.Component {
                 })
                 .catch(err => console.log(err))
         }
+
+        _refreshHandle() {
+            let theLocal = JSON.parse(localStorage.getItem('thing'))
+            console.log(`refresh fired for ${theLocal}`)
+            // event.preventDefault();
+            axios.get(
+                `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,news,chart&range=1m&last=10`)
+                .then(result =>   {
+                    console.log(result.data)
+                    // localStorage.setItem( "thing", JSON.stringify(result.data))
+                    this.setState({
+                        data: result.data,
+                        stock: result.data.company.symbol,
+                        chart: result.data.chart,
+                    })
+                    console.log(this.state.data.company.companyName,`abcSearch Success`)
+                    })
+                    .catch(err => console.log(err))
+            }
 
 
 
