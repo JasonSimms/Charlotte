@@ -126,9 +126,6 @@ class Application extends React.Component {
                 //         localStorage.getItem("thing")
                 //         // )
                 //     })
-                
-
-
                 console.log(this.state.data,`Searched Successful`)
 //COULD RENDER CHARTS HERE:
 //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                

@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 const Searchbar = props => {
     return (
         <div className="container nav-content">
-         <form className="search" onSubmit={props.searchItems}>
+         <form className="search" 
+        //  onSubmit={props.searchItems}
+         >
             <input
                 className="input"
                 value={props.query}
@@ -12,8 +14,8 @@ const Searchbar = props => {
                 type="text"
                 placeholder="name"
             />
-            <Link className="link" to={`/chart/${props.stock}`}>
-            <button type="submit" className="button" value="$">$</button>
+            <Link className="link" to={`/chart/${props.stock}`} >
+            <button type="submit" className="button" onClick={props.searchItems}  value="$">$</button>
             </Link>
         </form>
          <button className="favorite">
