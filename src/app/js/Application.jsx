@@ -11,6 +11,13 @@ import NotFound from './NotFound'
 import api from './utils/api'
 import Searchbar from './Searchbar'
 import Chart from './Chart'
+import Trends from './Trends'
+import Advisor from './Advisor'
+
+
+
+
+
 
 
 class Application extends React.Component {
@@ -19,25 +26,55 @@ class Application extends React.Component {
 
         this.state = {
             user: this._setUser(true),
-            stock: "aapl"
+            query: "",
+            stock: "F",
+            data: "",
+            test: ""
         }
 
         this._setUser = this._setUser.bind(this)
         this._resetUser = this._resetUser.bind(this)
+        this._searchItems = this._searchItems.bind(this);
+    this._handleSearchChange = this._handleSearchChange.bind(this)
+    this._initStock = this._initStock.bind(this)
+        
+
     }
 
     componentDidMount() {
         this._setUser()
+        this._initStock("spy")
     }
-
+    
     render() {
         return (
             <BrowserRouter>
                 <div>
-                    <Navigation user={this.state.user} />
-                    <Searchbar user={this.state.user} />
+                    <Navigation user={this.state.user}
+                        stock={this.state.stock} 
+                        />
+                    <Searchbar 
+                   search={this.state.query}
+                   handleSearchChange={this._handleSearchChange}
+                   searchItems={this._searchItems}
+                   stock={this.state.stock} 
+
+                                    
+                    />
                     <Switch>
-                        <Route exact path="/chart" render={() => <Chart stock={this.state.stock} />} />
+                        <Route path="/chart/:id" render={() => <Chart 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        />} />
+                        <Route path="/trends" render={() => <Trends 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        initStock={this._initStock}
+                        />} />
+                        <Route path="/roboadvisor" render={() => <Advisor 
+                        stock={this.state.stock} 
+                        data={this.state.data}
+                        />} />
                         <Route exact path="/" render={() => <Home user={this.state.user} />} />
                         <Route exact path="/profile" render={() => <Profile user={this.state.user} />} />
                         <Route
@@ -68,6 +105,66 @@ class Application extends React.Component {
             return null
         }
     }
+
+    _searchItems(event) {
+        let x = this.state.query;
+        event.preventDefault();
+        // console.log("::app/js/Application searchItems", x);
+        //API IS NOT CASE SENSITIVE
+        axios.get(
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news`)
+            .then(result =>   {
+                console.log(result.data)
+                
+                localStorage.setItem( "thing", JSON.stringify(result.data))
+                    this.setState({
+                        data: result.data,
+                        stock: result.data.company.symbol,
+                    })
+                // this.setState({ data: 
+                //     // JSON.parse(
+                //         localStorage.getItem("thing")
+                //         // )
+                //     })
+                
+
+
+                console.log(this.state.data,`Searched Successful`)
+//COULD RENDER CHARTS HERE:
+//HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                
+                return api.post(
+                    `/api/search`,
+                    { symbol: this.state.stock, companyName:this.state.data.company.companyName, logo:this.state.data.logo.url, visitor:this.state.user},
+                    )
+                })
+                .then(result => {
+                    // do something here with api result
+                    // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
+                    // this._setUser()
+                })
+                .catch(err => console.log(err))
+        }
+
+
+
+
+      _handleSearchChange(value) {
+        this.setState({
+            query: value,
+        })
+      }
+
+      _initStock(z) {
+          axios.get(
+              `https://api.iextrading.com/1.0/stock/${z}/batch?types=company,logo,news`)
+              .then(result =>   {
+                  this.setState({
+                      data: result.data,
+                      stock: z,
+                    })
+                    console.log(`init fired`,z)
+                })
+            }
 }
 
 export default Application

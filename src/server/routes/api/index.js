@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 const authRoutes = require('./auth')
+const tickerRoutes = require('./tickerApi')
 const { userMiddleware, checkLoggedIn } = require('../../utils/middleware')
+const Ticker = require('../../models/Ticker')
 
 router.use(userMiddleware)
 
@@ -16,9 +18,13 @@ router.get('/protected', checkLoggedIn, (req, res) => {
 })
 
 router.use('/auth', authRoutes)
+router.use('/search', tickerRoutes)
+
 
 router.use((req, res) => {
     res.status(404).send({ error: 'not-found' })
 })
+
+
 
 module.exports = router

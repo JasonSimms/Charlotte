@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const tickerSchema = new Schema({
-    Symbol: {
+    symbol: {
         type: String,
         required: true,
         unique: true,
@@ -17,10 +17,11 @@ const tickerSchema = new Schema({
     },
     visits: {
         type: Number,
-        default: 0
+        default: 1
     },
     visitors: {
-        type: String
+        type: String,
+        unique: true
     },
     comments:{
         type: Array
