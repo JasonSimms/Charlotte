@@ -15,6 +15,7 @@ import Trends from "./Trends";
 import Advisor from "./Advisor";
 import Comments from "./commentForm";
 import ComDisplay from "./CommentDisplay";
+import FinData from "./FinData";
 
 
 // This is for deployment
@@ -56,8 +57,7 @@ class Application extends React.Component {
 
   render() {
     return (
-      <BrowserRouter
-      >
+      <BrowserRouter>
         <div>
           <Navigation user={this.state.user} stock={this.state.stock} />
           <Searchbar
@@ -70,11 +70,17 @@ class Application extends React.Component {
             <Route
               path="/chart"
               render={() => (
-                <Chart
-                  stock={this.state.stock}
-                  data={this.state.data}
-                  refresh={this._refreshHandle}
-                />
+                <React.Fragment>
+                  <Chart
+                    stock={this.state.stock}
+                    data={this.state.data}
+                    refresh={this._refreshHandle}
+                  />
+                  <FinData
+                    stock={this.state.stock}
+                    data={this.state.data}
+                  />
+                </React.Fragment>
               )}
             />
             <Route
@@ -90,8 +96,6 @@ class Application extends React.Component {
                   <ComDisplay
                     comments={this.state.comments}
                     findComments={this._setComments}
-
-
                   />
                   <Comments
                     handleInputChange={this._handleInputChange}
@@ -143,7 +147,7 @@ class Application extends React.Component {
   }
 
   _setComments() {
-    console.log(`setcomments fired`)
+    console.log(`setcomments fired`);
     // api
     //   .post(`/api/comment/update`, {
     //     stock: this.state.stock
@@ -179,7 +183,7 @@ class Application extends React.Component {
     //API IS NOT CASE SENSITIVE
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news,chart&range=1m&last=10`
+        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,news,chart&range=1m&last=10`
       )
       .then(result => {
         console.log(result.data);
@@ -197,15 +201,18 @@ class Application extends React.Component {
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
-        return api.post(`/api/search`, {
-          symbol: this.state.stock,
-          companyName: this.state.data.company.companyName,
-          logo: this.state.data.logo.url,
-          visitor: this.state.user
-        }).then(results => 
-          this.setState({
-            comments: results,
+        return api
+          .post(`/api/search`, {
+            symbol: this.state.stock,
+            companyName: this.state.data.company.companyName,
+            logo: this.state.data.logo.url,
+            visitor: this.state.user,
+            earnings: this.state.data.earnings.earnings
           })
+          .then(results =>
+            this.setState({
+              comments: results
+            })
           );
       })
       .then(result => {
@@ -222,7 +229,7 @@ class Application extends React.Component {
     // event.preventDefault();
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,news,chart&range=1m&last=10`
+        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,stats,news,chart&range=1m&last=10`
       )
       .then(result => {
         console.log(result.data);
@@ -230,7 +237,7 @@ class Application extends React.Component {
         this.setState({
           data: result.data,
           stock: result.data.company.symbol,
-          chart: result.data.chart,
+          chart: result.data.chart
         });
         console.log(this.state.data.company.companyName, `abcSearch Success`);
       })
@@ -271,11 +278,11 @@ class Application extends React.Component {
         stock: this.state.stock
       })
       .then(result => {
-        console.log(`commentPOstended`,result);
+        console.log(`commentPOstended`, result);
         this.setState({
-          comments:result,
-          comment:""
-        })
+          comments: result,
+          comment: ""
+        });
       })
       .catch(err => {
         console.log(err);

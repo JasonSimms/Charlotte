@@ -27,7 +27,7 @@ const tickerSchema = new Schema({
         type: Array
     },
     earnings:{
-        type: String
+        type: Array
     }
 })
 

@@ -5,14 +5,13 @@ const Searchbar = props => {
     return (
         <div className="container nav-content">
          <form className="search" 
-        //  onSubmit={props.searchItems}
          >
             <input
                 className="input"
                 value={props.query}
                 onChange={event => props.handleSearchChange(event.target.value)}
                 type="text"
-                placeholder="Enter a valid Ticker"
+                placeholder="Symbol"
             />
             {/* <Link className="link" to={`/chart/${props.stock}`} > */}
             <button className="button" onClick={props.searchItems}  value="$">$</button>
