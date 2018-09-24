@@ -15,7 +15,7 @@ import Trends from './Trends'
 import Advisor from './Advisor'
 
 
-
+// This is for deployment
 
 
 
@@ -143,7 +143,8 @@ class Application extends React.Component {
                 //         localStorage.getItem("thing")
                 //         // )
                 //     })
-                console.log(this.state.data.company.companyName,`abcSearch Success`)
+                console.log(this.state.data.company.companyName,`Search Success`)
+
 //COULD RENDER CHARTS HERE:
 //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")                
                 return api.post(
