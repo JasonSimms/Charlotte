@@ -14,9 +14,9 @@ const Searchbar = props => {
                 type="text"
                 placeholder="name"
             />
-            <Link className="link" to={`/chart/${props.stock}`} >
-            <button type="submit" className="button" onClick={props.searchItems}  value="$">$</button>
-            </Link>
+            {/* <Link className="link" to={`/chart/${props.stock}`} > */}
+            <button className="button" onClick={props.searchItems}  value="$">$</button>
+            {/* </Link> */}
         </form>
          <button className="favorite">
          Fav 1
