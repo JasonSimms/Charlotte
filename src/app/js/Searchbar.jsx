@@ -12,7 +12,7 @@ const Searchbar = props => {
                 value={props.query}
                 onChange={event => props.handleSearchChange(event.target.value)}
                 type="text"
-                placeholder="name"
+                placeholder="Enter a valid Ticker"
             />
             {/* <Link className="link" to={`/chart/${props.stock}`} > */}
             <button className="button" onClick={props.searchItems}  value="$">$</button>
