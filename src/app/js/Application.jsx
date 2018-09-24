@@ -29,7 +29,8 @@ class Application extends React.Component {
             query: "",
             stock: "F",
             data: "",
-            test: ""
+            test: "",
+            chart: "",
         }
 
         this._setUser = this._setUser.bind(this)
@@ -112,7 +113,7 @@ class Application extends React.Component {
         // console.log("::app/js/Application searchItems", x);
         //API IS NOT CASE SENSITIVE
         axios.get(
-            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news`)
+            `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,news,chart&range=1m&last=10`)
             .then(result =>   {
                 console.log(result.data)
                 
@@ -120,6 +121,7 @@ class Application extends React.Component {
                     this.setState({
                         data: result.data,
                         stock: result.data.company.symbol,
+                        chart: result.data.chart
                     })
                 // this.setState({ data: 
                 //     // JSON.parse(
