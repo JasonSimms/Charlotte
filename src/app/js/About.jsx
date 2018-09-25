@@ -3,7 +3,7 @@ import React from 'react'
 const About = props => {
     return (
         <div className="container">
-    <div className="card">
+    <div className="about-div">
         <h2>All About MarketAware...</h2>
         <div className="product">
             <h3>Mission:</h3>
@@ -16,7 +16,7 @@ const About = props => {
         </div>
         <a target="_blank" href="https://github.com/JasonSimms/Charlotte" ><img src="/githubicon.png" alt="Github" height="30px"/></a>
     </div>
-    <div className="card team">
+    <div className="about-div">
         <h3>Team:</h3>
         <div className="row">
             <div className="cards">
@@ -46,7 +46,7 @@ const About = props => {
             </div>
         </div>
     </div>
-    <div className="card tech">
+    <div className="about-div" >
         <h3>Technology Used for this Project...</h3>
         <div className="row">
 

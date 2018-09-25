@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+// @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Rokkitt');
 
 * {
     box-sizing: border-box;
@@ -6,7 +7,7 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rokkitt', serif;
     font-size: 16px;
     color: $text-color;
 }

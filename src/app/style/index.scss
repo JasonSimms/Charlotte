@@ -23,6 +23,8 @@ $secondary-color: $color3;
 @import './base.scss';
 @import './components.scss';
 @import './navigation.scss';
+@import './cards.scss';
+
 
 body{
     background-color: $color1;
