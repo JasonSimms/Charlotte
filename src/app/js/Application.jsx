@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { BrowserRouter, Switch, Route, browserHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 import Auth from "./Auth";
 import Home from "./Home";
 import About from "./About";
 import Footer from "./Footer";
-
 
 import Navigation from "./Navigation";
 import Profile from "./Profile";
@@ -21,8 +20,7 @@ import Comments from "./commentForm";
 import ComDisplay from "./CommentDisplay";
 import FinData from "./FinData";
 
-
-// This is for deployment
+import CookieConsent from "react-cookie-consent";
 
 class Application extends React.Component {
   constructor(props) {
@@ -63,6 +61,10 @@ class Application extends React.Component {
     return (
       <BrowserRouter>
         <div>
+          {/* Remove Debug!!!! on production */}
+          <CookieConsent debug={true}>
+            This website uses cookies to enhance the user experience.
+          </CookieConsent>
           <Navigation user={this.state.user} stock={this.state.stock} />
           <Searchbar
             search={this.state.query}
@@ -80,10 +82,7 @@ class Application extends React.Component {
                     data={this.state.data}
                     refresh={this._refreshHandle}
                   />
-                  <FinData
-                    stock={this.state.stock}
-                    data={this.state.data}
-                  />
+                  <FinData stock={this.state.stock} data={this.state.data} />
                 </React.Fragment>
               )}
             />
@@ -126,11 +125,7 @@ class Application extends React.Component {
               path="/"
               render={() => <Home user={this.state.user} />}
             />
-            <Route
-              exact
-              path="/about"
-              render={() => <About/>}
-            />
+            <Route exact path="/about" render={() => <About />} />
             <Route
               exact
               path="/profile"
@@ -144,7 +139,7 @@ class Application extends React.Component {
             />
             <Route component={NotFound} />
           </Switch>
-          <Footer />          
+          <Footer />
         </div>
       </BrowserRouter>
     );
