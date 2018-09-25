@@ -60,7 +60,8 @@ class Application extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+
+        <div className="app">
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={true}>
             This website uses cookies to enhance the user experience.
@@ -90,12 +91,6 @@ class Application extends React.Component {
               path="/trends"
               render={() => (
                 <React.Fragment>
-                  <Trends
-                    stock={this.state.stock}
-                    data={this.state.data}
-                    initStock={this._initStock}
-                    refresh={this._refreshHandle}
-                  />
                   <ComDisplay
                     comments={this.state.comments}
                     findComments={this._setComments}
@@ -106,6 +101,12 @@ class Application extends React.Component {
                     stock={this.state.stock}
                     commentPost={this._commentPost}
                     comments={this.state.comments}
+                  />
+                  <Trends
+                    stock={this.state.stock}
+                    data={this.state.data}
+                    initStock={this._initStock}
+                    refresh={this._refreshHandle}
                   />
                 </React.Fragment>
               )}
@@ -141,6 +142,7 @@ class Application extends React.Component {
           </Switch>
           <Footer />
         </div>
+
       </BrowserRouter>
     );
   }
