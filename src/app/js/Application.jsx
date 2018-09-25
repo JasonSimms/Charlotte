@@ -5,6 +5,10 @@ import jwtDecode from "jwt-decode";
 
 import Auth from "./Auth";
 import Home from "./Home";
+import About from "./About";
+import Footer from "./Footer";
+
+
 import Navigation from "./Navigation";
 import Profile from "./Profile";
 import NotFound from "./NotFound";
@@ -124,6 +128,11 @@ class Application extends React.Component {
             />
             <Route
               exact
+              path="/about"
+              render={() => <About/>}
+            />
+            <Route
+              exact
               path="/profile"
               render={() => <Profile user={this.state.user} />}
             />
@@ -135,6 +144,7 @@ class Application extends React.Component {
             />
             <Route component={NotFound} />
           </Switch>
+          <Footer />          
         </div>
       </BrowserRouter>
     );

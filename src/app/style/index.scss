@@ -1,7 +1,24 @@
-$primary-color: #63adf2;
-$secondary-color: #ff686b;
+// $primary-color: #63adf2;
+// $secondary-color: #ff686b;
 $text-color: #333;
 $grey: rgb(200, 200, 200);
+
+// /* HSL */
+// $color1: hsla(78%, 8%, 70%, 1);
+// $color2: hsla(202%, 52%, 17%, 1);
+// $color3: hsla(204%, 42%, 27%, 1);
+// $color4: hsla(79%, 57%, 95%, 1);
+// $color5: hsla(84%, 14%, 93%, 1);
+
+/* RGB */
+$color1: rgba(180, 184, 171, 1);
+$color2: rgba(21, 50, 67, 1);
+$color3: rgba(40, 75, 99, 1);
+$color4: rgba(244, 249, 233, 1);
+$color5: rgba(238, 240, 235, 1);
+
+$primary-color: $color2;
+$secondary-color: $color3;
 
 @import './base.scss';
 @import './components.scss';

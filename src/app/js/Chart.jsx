@@ -16,9 +16,9 @@ import {
 
 
 const Chart = props => {
-    console.log(props)
+    // console.log(props)
   let chartData = props.data.chart;
-  console.log(`Chart Component sees: `, chartData);
+  // console.log(`Chart Component sees: `, chartData);
 if(props.data == ""){
     return(
         <div>
