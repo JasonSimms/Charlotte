@@ -9,7 +9,6 @@ const Trends = props => {
   } else {
     // NEWS IMAGES DO NOT LOAD. 404 error outsanding issue.
     let news = props.data.news;
-    console.log(props.data.logo.url);
     const mappedNews = news.map((el, i) => {
       return (
         <article className="article column" key={el.datetime}>

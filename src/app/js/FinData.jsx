@@ -8,17 +8,28 @@ const FinData = props => {
     return <div>No Data?...</div>;
   } else {
     const datum = props.data.stats; 
-    console.log(`look here`, Object.keys(datum));
-    // const mappeddatum = datum.map((el, i) => {
-    //   return <li key={i}>{el.key}</li>;
-    // });
+    // console.log(`look here`, Object.keys(datum));
+    const toBeDisplayed = [
+      "week52high",
+    "week52low",
+    "dividendRate"
+    ]
+    const display = toBeDisplayed.map((el, i) => {
+      // console.log(`el is`,el)
+      // console.log(`datum is`,datum)
+
+      // console.log(datum[el])
+      return <li key={i}>{el}: {datum[el]}</li>;
+    });
 
     return (
       <div>
         <div className="container">
           <h2>
             ExDividenDate:
-            {/* {datum.exDividendDate} */}
+            <ul>
+            {display}
+            </ul>
           </h2>
         </div>
       </div>

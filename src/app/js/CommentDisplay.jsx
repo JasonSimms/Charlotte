@@ -11,17 +11,17 @@ const ComDisplay = props => {
     return <div>No Hot Tips Yet...</div>;
   } else {
     let commentArr = props.comments;
+    console.log(commentArr)
     const mappedComs = commentArr.map((el, i) => {
-      return <li key={i}>{el.comment}</li>;
+      return <li key={i}>{el.author} writes: {el.comment}</li>;
     }
   );
 
     return (
       <div>
-        <div className="container">
+        <div className="cardbox">
           <h2>
-
-            Comment Display here
+            Community Ideas!
           </h2>
           <ul>{mappedComs}</ul>
         </div>

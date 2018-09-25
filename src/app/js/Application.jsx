@@ -34,7 +34,8 @@ class Application extends React.Component {
       test: "",
       chart: "",
       comment: "",
-      comments: ""
+      comments: "",
+      displayname: this._setUser(true)
     };
 
     this._setUser = this._setUser.bind(this);
@@ -65,6 +66,14 @@ class Application extends React.Component {
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={true}>
             This website uses cookies to enhance the user experience.
+            Financial Disclaimer :
+All information found here including predictions,view,commentary, & suggestions are for informational and entertainment purposes only and should not be viewed as investment advice. I am not a licensed financial advisor.
+
+I am not responsible for any investment actions which are a result of your use of this site.
+
+All financial investments carry risk, before engaging in such activities consider these as described by your broker and be prepared to loose some or all capital investment
+
+As a hobby investor the creator of this site may or may not have standing positions in many business you will see here.
           </CookieConsent>
           <Navigation user={this.state.user} stock={this.state.stock} />
           <Searchbar
@@ -99,8 +108,9 @@ class Application extends React.Component {
                     handleInputChange={this._handleInputChange}
                     comment={this.state.comment}
                     stock={this.state.stock}
+                    displayname={this.state.user}
                     commentPost={this._commentPost}
-                    comments={this.state.comments}
+                    // comments={this.state.comments}
                   />
                   <Trends
                     stock={this.state.stock}
@@ -184,6 +194,7 @@ class Application extends React.Component {
 
   _searchItems(event) {
     let x = this.state.query;
+
     console.log(x);
     event.preventDefault();
     // console.log("::app/js/Application searchItems", x);
@@ -195,16 +206,17 @@ class Application extends React.Component {
       .then(result => {
         console.log(result.data);
         localStorage.setItem(
-          "thing",
+          "lastSearched",
           JSON.stringify(result.data.company.symbol)
         );
         this.setState({
           data: result.data,
           stock: result.data.company.symbol,
           chart: result.data.chart,
-          comments: ""
+          comments: "",
+          query:"",
         });
-        console.log(this.state.data.company.companyName, `Search Success`);
+        console.log(this.state.data.company.companyName,"query:",this.state.query, `Search Success`);
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
@@ -231,7 +243,7 @@ class Application extends React.Component {
   }
 
   _refreshHandle() {
-    let theLocal = JSON.parse(localStorage.getItem("thing"));
+    let theLocal = JSON.parse(localStorage.getItem("lastSearched"));
     console.log(`refresh fired for ${theLocal}`);
     // event.preventDefault();
     axios
@@ -282,6 +294,7 @@ class Application extends React.Component {
     api
       .post(`/api/comment`, {
         comment: this.state.comment,
+        author: this.state.user.email,
         stock: this.state.stock
       })
       .then(result => {

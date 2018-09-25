@@ -2,7 +2,9 @@ import React from 'react'
 
 const Home = props => {
     return (
-        <div className="container">
+        <div className="generic">
+                <img src="https://i.redd.it/e2q15bipo8901.jpg" alt="you" height="200" />
+
             <h1>Hello, {props.user ? props.user.email : 'Stranger'}!</h1>
             <h3>Getting Started...</h3>
             <p>Login to get access to the best features!</p>

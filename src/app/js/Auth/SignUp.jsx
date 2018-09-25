@@ -16,7 +16,7 @@ class SignUp extends React.Component {
                     value={this.props.email}
                     onChange={evt => this.props.handleInputChange('email', evt.target.value)}
                     className="input"
-                    placeholder="E-Mail"
+                    placeholder="User Name"
                 />
                 <br />
                 <br />
