@@ -2,20 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PromiseProvider } from "mongoose";
 import {
-  LineChart,
+  ComposedChart,
   Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer,
+  Bar,
+  Area
 } from "recharts";
 
 
 const Chart = props => {
-    console.log(props)
+    // console.log(props)
   let chartData = props.data.chart;
-  console.log(`Chart Component sees: `, chartData);
+  // console.log(`Chart Component sees: `, chartData);
 if(props.data == ""){
     return(
         <div>
@@ -25,22 +28,31 @@ if(props.data == ""){
 }else{
     return (
         <div className="container">
-      <h2>
-        Herea are charts of....
+      <h5>
+        Charts For...
         {props.data.company.companyName}
-      </h2>
-      <LineChart width={400} height={400} data={chartData}>
-        <Line type="monotone" dataKey="close" stroke="#8884d8" />
+      </h5>
+      <ResponsiveContainer width="100%" height={400}>
+      <ComposedChart  data={chartData}>
+        <Line yAxisId="price" type="monotone" dataKey="close" stroke="#8884d8" />
+        <Area yAxisId="vol" dataKey='volume' fill='#413ea0' />
+        <Bar yAxisId="delta" dataKey='changePercent' barSize={10} fill='#413ea0' />
+
+
         {/* <Line type="monotone" dataKey="volume" stroke="#8884d8" /> */}
-        <XAxis dataKey="date" 
+        <XAxis dataKey="label" 
         tickFormatter={formatXAxis}
         />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey="label" />
+        <YAxis yAxisId="price"  domain={['auto', 'auto']}/>
+        <YAxis yAxisId="vol" hide='true' orientation='right' padding={{top:250}}/>
+        <YAxis yAxisId="delta" hide='true' orientation='right' padding={{top:100, bottom:100}} />
+
+        <CartesianGrid strokeDasharray="5 1"/>
         <Tooltip/>
 
-      </LineChart>
+      </ComposedChart>
+        </ResponsiveContainer>
       {/* <img src={props.data.logo.url} alt="" /> */}
     </div>
   );

@@ -3,6 +3,8 @@ const router = express.Router()
 
 const authRoutes = require('./auth')
 const tickerRoutes = require('./tickerApi')
+const commentRoutes = require('./commentAPI')
+
 const { userMiddleware, checkLoggedIn } = require('../../utils/middleware')
 const Ticker = require('../../models/Ticker')
 
@@ -13,12 +15,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/protected', checkLoggedIn, (req, res) => {
-    console.log('USER', req.user)
+    // console.log('USER', req.user)
     res.send({ success: true })
 })
 
 router.use('/auth', authRoutes)
 router.use('/search', tickerRoutes)
+router.use('/comment', commentRoutes)
+
 
 
 router.use((req, res) => {

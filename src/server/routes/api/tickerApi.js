@@ -11,16 +11,20 @@ router.use(userMiddleware)
 
 router.post('/', (req, res) => {
     const { symbol } = req.body
-    console.log(`tick here: `,req.body.visitor._id)
-    Ticker.findOneAndUpdate({ symbol }, {$inc:{visits: 1}, $addToSet:{visitors: req.body.visitor}})
+    console.log(`tick here: `,req.body.symbol)
+    Ticker.findOneAndUpdate({ symbol }, {$inc:{visits: 1}, earnings:req.body.earnings, $addToSet:{visitors: req.body.visitor}})
     .then(existingTicker => {
         if(!existingTicker)return new Ticker(req.body).save()
+        if(existingTicker) res.send(existingTicker.comments)
+        // console.log(`existing ticker:`,existingTicker.comments)
     })
-    console.log('Ticker created?',req.body.symbol)
+    console.log('apipost complete',req.body.symbol)
     // res.send({
-    //     info,
-    //     token: generateUserToken()
+    //     existingTicker
+    // //     info,
+    // //     token: generateUserToken()
     // })
 })
+
 
 module.exports = router
