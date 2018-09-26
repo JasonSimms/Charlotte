@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
             "author": req.body.author,
             "comment": req.body.comment}}})
             .then(result => 
-                // console.log(`comment api result.comments =`, result.comments)
+                // console.log(`comment api result.comments =`, result)
                 res.send(result.comments)
                 )
             }else{

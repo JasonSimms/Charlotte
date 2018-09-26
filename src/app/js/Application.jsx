@@ -289,7 +289,7 @@ As a hobby investor the creator of this site may or may not have standing positi
   }
 
   _commentPost() {
-    console.log(`commentPost Fired`);
+    console.log(`commentPost Fired`,this.state.query);
     api
       .post(`/api/comment`, {
         comment: this.state.comment,
@@ -297,7 +297,7 @@ As a hobby investor the creator of this site may or may not have standing positi
         stock: this.state.stock
       })
       .then(result => {
-        console.log(`result is`,result)
+        // console.log(`result is`,result)
         this.setState({
           comments: result,
           comment: ""
