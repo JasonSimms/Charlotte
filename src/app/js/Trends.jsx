@@ -18,43 +18,11 @@ const Trends = props => {
           <p className="article__excerpt">{el.summary}</p>
         </a>
         </article>
-
-        // <div className="news-card" key={i}>
-        //   {el.headline}
-        //   <br />
-        //   <br />
-        //   {el.summary}
-        //   <br />
-        //   Source: {el.source}
-        //   <br />
-        //   <a href={el.url} target="_blank">
-        //     Link to Article
-        //   </a>
-        // </div>
-
-        // <div className="blog-card alt" key={el.datetime}>
-        //   {/* <div className="meta"
-        //       >
-        //       <div className="photo"
-        //       style={{backgroundImage: `url(${props.data.logo.url})`}}
-        //       />
-        //     </div> */}
-        //   <div className="description">
-        //     <h1>{el.headline}</h1>
-        //     <h2>{el.source}</h2>
-        //     <p>{el.summary}</p>
-        //     <p className="read-more">
-        //       <a href={el.url} target="_blank">
-        //         Read More
-        //       </a>
-        //     </p>
-        //   </div>
-        // </div>
       );
     });
 
     return (
-        <div className="trendscontainer">
+        <div className="container trendscontainer">
             <h2>What's new at {props.data.company.companyName}?</h2>
             <div className="cardbox">{mappedNews}</div>
         </div>

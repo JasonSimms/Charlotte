@@ -25,12 +25,18 @@ $navLink: $color5;
 $searchLink: $color5;
 $footerColor: $color3;
 $newsCard: white;
+$searchButtons: green;
+$goButton: red;
 
 @import './base.scss';
 @import './components.scss';
 @import './navigation.scss';
 @import './cards.scss';
 @import './cards2.scss';
+@import './comcards.scss';
+@import './findata.scss';
+
+
 
 
 

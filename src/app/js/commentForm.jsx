@@ -10,8 +10,8 @@ class Comments extends React.Component {
 
   render() {
     let commentform;
-    if (this.props.displayname) {commentform = (<div>
-      <input
+    if (this.props.displayname) {commentform = (<div className="cardbox">
+      <input className="input cominput"
       type="text"
       placeholder="Share some knowledge with your comrades!"
       value={this.props.comment}
@@ -26,7 +26,7 @@ class Comments extends React.Component {
 
 
     return (
-      <div className="cardbox">
+      <div className="container" >
   
         {commentform}
       </div>

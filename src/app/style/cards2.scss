@@ -5,6 +5,16 @@
   width: 90%;
   // max-width: 960px;
   margin: 0 auto;
+
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
 }
 
 /* Column */
