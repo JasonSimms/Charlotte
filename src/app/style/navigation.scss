@@ -31,3 +31,10 @@
     z-index: 350;
 }
 
+.searchBar{
+        background-color: red;
+        // overflow: hidden;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+}
