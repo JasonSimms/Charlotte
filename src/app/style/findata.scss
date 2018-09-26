@@ -1,0 +1,36 @@
+.databox{
+    background-color: white;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    // max-width: 960px;
+    margin: 0 auto;
+  
+  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    
+    -webkit-flex-flow: row wrap;
+    // justify-content: center;
+      }
+
+.datacard{
+    flex-grow: 1;
+    padding: 5px 10px;
+    background-color: peachpuff;
+    border: 1px solid grey;
+}
+
+table{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid black;
+
+}

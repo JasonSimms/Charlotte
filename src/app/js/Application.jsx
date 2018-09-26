@@ -201,7 +201,7 @@ class Application extends React.Component {
 
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,news,chart&range=1m&last=10`
+        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,quote,news,chart&range=1m&last=10`
       )
       .then(result => {
         // console.log(result.data);
@@ -252,7 +252,7 @@ class Application extends React.Component {
     // event.preventDefault();
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,stats,news,chart&range=1m&last=10`
+        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,quote,peers,stats,news,chart&range=1m&last=10`
       )
       .then(result => {
         // console.log(result.data);

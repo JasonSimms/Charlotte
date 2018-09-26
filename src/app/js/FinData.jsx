@@ -12,24 +12,20 @@ const FinData = props => {
     const toBeDisplayed = [
       "week52high",
     "week52low",
-    "dividendRate"
+    "dividendRate","shortInterest", "dividendRate", "exDividendDate","latestEPSDate","revenue", "grossProfit", "cash","debt","returnOnAssets","profitMargin","day200MovingAvg","instutionPercent","insiderPercent","shortRatio","year2ChangePercent","month3ChangePercent","day5ChangePercent"
     ]
     const display = toBeDisplayed.map((el, i) => {
-      // console.log(`el is`,el)
-      // console.log(`datum is`,datum)
+      return <div className="datacard" key={i}>{el}  :  {datum[el]}</div>;
 
-      // console.log(datum[el])
-      return <li key={i}>{el}: {datum[el]}</li>;
     });
 
     return (
       <div>
         <div className="container">
           <h2>
-            ExDividenDate:
-            <ul>
+            <div className="databox">
             {display}
-            </ul>
+            </div>
           </h2>
         </div>
       </div>
