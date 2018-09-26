@@ -1,5 +1,5 @@
 .navigation {
-    background-color: $primary-color;
+    background-color: $navBar;
 }
 
 .nav-content {
@@ -8,18 +8,18 @@
 }
 
 .nav-link {
-    color: #fff;
+    color: $navLink;
 
     &:visited {
-        color: #fff;
+        color: $navLink;
     }
 
     &:hover {
-        color: #fff;
+        color: $navLink;
     }
 }
 .footer {
-    background-color: $secondary-color;
+    background-color: $footerColor;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -32,9 +32,21 @@
 }
 
 .searchBar{
-        background-color: red;
+        background-color: $searchBar;
         // overflow: hidden;
         position: -webkit-sticky;
         position: sticky;
         top: 0;
+}
+
+.search-link {
+    color: $searchLink;
+
+    &:visited {
+        color: $searchLink;
+    }
+
+    &:hover {
+        color: $searchLink;
+    }
 }

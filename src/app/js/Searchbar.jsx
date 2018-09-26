@@ -17,15 +17,15 @@ const Searchbar = props => {
             <button className="button" onClick={props.searchItems}  value="$">$</button>
         </form>
 
-        <Link className="link nav-link" to={`/chart/`}>
+        <Link className="link search-link" to={`/chart/`}>
                               Charts
                              </Link>
                              &nbsp; &nbsp; &nbsp;
-                     <Link className="link nav-link" to={`/trends/`}>
+                     <Link className="link search-link" to={`/trends/`}>
                               Trends
                              </Link>
                              &nbsp; &nbsp; &nbsp;
-                             <Link className="link nav-link" to={`/roboadvisor/${props.stock}`}>
+                             <Link className="link search-link" to={`/roboadvisor/${props.stock}`}>
                               Advisor
                              </Link>
          {/* <button className="favorite">
