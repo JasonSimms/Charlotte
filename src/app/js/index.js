@@ -1,9 +1,21 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
+const Application = require('./Application').default
+import { BrowserRouter } from "react-router-dom";
+
+class Wrapper extends React.Component {
+    render(){
+        return (
+            <BrowserRouter>
+            <Application />
+            </BrowserRouter>
+        )
+    }
+}
 
 function renderApp() {
-    const Application = require('./Application').default
-    ReactDOM.render(<Application />, document.getElementById('app'))
+    
+    ReactDOM.render(<Wrapper/>, document.getElementById('app'))
 }
 
 renderApp()
