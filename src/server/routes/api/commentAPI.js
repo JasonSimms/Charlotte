@@ -10,21 +10,20 @@ router.use(userMiddleware)
 
 
 router.post('/', (req, res) => {
- console.log(`herro POST`)
  const { comment, stock } = req.body
  if(req.body.comment !== ""){
-
      console.log(req.body.stock, req.body.comment)
      Ticker.findOneAndUpdate({symbol:req.body.stock}, 
         {$push:{comments: {
             "author": req.body.author,
             "comment": req.body.comment}}})
             .then(result => 
-                // console.log(result.comments)
+                // console.log(`comment api result.comments =`, result.comments)
                 res.send(result.comments)
                 )
-            }else{console.log("comment field blank")}
- 
+            }else{
+                console.log("comment field blank")
+            }
 })
 
 router.post('/update', (req, res) => {

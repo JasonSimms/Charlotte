@@ -43,7 +43,7 @@ class Advisor extends React.Component {
             content = "somthing nice"
         }else{ content = "something bad"}
 
-console.log(this.props)
+// console.log(this.props)
         return (
             <div>
                 {content}

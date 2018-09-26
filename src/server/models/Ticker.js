@@ -24,7 +24,8 @@ const tickerSchema = new Schema({
         unique: true
     },
     comments:{
-        type: Array
+        type: Array,
+        default: {author:"Franz", comment:"this is a default comment"}
     },
     earnings:{
         type: Array

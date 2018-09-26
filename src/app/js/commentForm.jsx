@@ -9,7 +9,6 @@ class Comments extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let commentform;
     if (this.props.displayname) {commentform = (<div>
       <input

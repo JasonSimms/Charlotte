@@ -110,7 +110,6 @@ As a hobby investor the creator of this site may or may not have standing positi
                     stock={this.state.stock}
                     displayname={this.state.user}
                     commentPost={this._commentPost}
-                    // comments={this.state.comments}
                   />
                   <Trends
                     stock={this.state.stock}
@@ -194,17 +193,16 @@ As a hobby investor the creator of this site may or may not have standing positi
 
   _searchItems(event) {
     let x = this.state.query;
+    console.log(`x is =`,x)
 
-    console.log(x);
     event.preventDefault();
-    // console.log("::app/js/Application searchItems", x);
-    //API IS NOT CASE SENSITIVE
+   
     axios
       .get(
         `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,news,chart&range=1m&last=10`
       )
       .then(result => {
-        console.log(result.data);
+        // console.log(result.data);
         localStorage.setItem(
           "lastSearched",
           JSON.stringify(result.data.company.symbol)
@@ -216,7 +214,7 @@ As a hobby investor the creator of this site may or may not have standing positi
           comments: "",
           query:"",
         });
-        console.log(this.state.data.company.companyName,"query:",this.state.query, `Search Success`);
+        console.log(this.state.query, `Search Success`);
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
@@ -229,13 +227,14 @@ As a hobby investor the creator of this site may or may not have standing positi
             earnings: this.state.data.earnings.earnings
           })
           .then(results =>
+            // console.log(`here i should see comments?`,results)
             this.setState({
               comments: results
             })
           );
       })
       .then(result => {
-        // console.log(result)// do something here with api result
+        console.log(`what is here?`,result)// do something here with api result
         // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
         // this._setUser()
       })
@@ -290,7 +289,7 @@ As a hobby investor the creator of this site may or may not have standing positi
   }
 
   _commentPost() {
-    console.log(`commented~!@!@#!~`);
+    console.log(`commentPost Fired`);
     api
       .post(`/api/comment`, {
         comment: this.state.comment,
@@ -298,11 +297,12 @@ As a hobby investor the creator of this site may or may not have standing positi
         stock: this.state.stock
       })
       .then(result => {
-        console.log(`commentPOstended`, result);
+        console.log(`result is`,result)
         this.setState({
           comments: result,
           comment: ""
         });
+        console.log(`state after commentPost`,this.state.comments)
       })
       .catch(err => {
         console.log(err);
