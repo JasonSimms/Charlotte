@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 import Auth from "./Auth";
@@ -60,25 +60,27 @@ class Application extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-
+      
         <div className="app">
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={true}>
-            This website uses cookies to enhance the user experience.
-            Financial Disclaimer :
-All information found here including predictions,view,commentary, & suggestions are for informational and entertainment purposes only and should not be viewed as investment advice. I am not a licensed financial advisor.
-
-I am not responsible for any investment actions which are a result of your use of this site.
-
-All financial investments carry risk, before engaging in such activities consider these as described by your broker and be prepared to loose some or all capital investment
-
-As a hobby investor the creator of this site may or may not have standing positions in many business you will see here.
+            This website uses cookies to enhance the user experience. Financial
+            Disclaimer : All information found here including
+            predictions,view,commentary, & suggestions are for informational and
+            entertainment purposes only and should not be viewed as investment
+            advice. I am not a licensed financial advisor. I am not responsible
+            for any investment actions which are a result of your use of this
+            site. All financial investments carry risk, before engaging in such
+            activities consider these as described by your broker and be
+            prepared to loose some or all capital investment As a hobby investor
+            the creator of this site may or may not have standing positions in
+            many business you will see here.
           </CookieConsent>
           <Navigation user={this.state.user} stock={this.state.stock} />
           <Searchbar
-            search={this.state.query}
+            query={this.state.query}
             handleSearchChange={this._handleSearchChange}
+            handleInputChange={this._handleInputChange}
             searchItems={this._searchItems}
             stock={this.state.stock}
           />
@@ -151,8 +153,6 @@ As a hobby investor the creator of this site may or may not have standing positi
           </Switch>
           <Footer />
         </div>
-
-      </BrowserRouter>
     );
   }
 
@@ -162,8 +162,11 @@ As a hobby investor the creator of this site may or may not have standing positi
     });
   }
 
-  _setComments() {
+  _setComments(lastcomment) {
     console.log(`setcomments fired`);
+    this.setState({
+      comments: this.state.comments.concat(lastcomment)
+    });
     // api
     //   .post(`/api/comment/update`, {
     //     stock: this.state.stock
@@ -193,10 +196,9 @@ As a hobby investor the creator of this site may or may not have standing positi
 
   _searchItems(event) {
     let x = this.state.query;
-    console.log(`x is =`,x)
 
     event.preventDefault();
-   
+
     axios
       .get(
         `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,news,chart&range=1m&last=10`
@@ -212,29 +214,32 @@ As a hobby investor the creator of this site may or may not have standing positi
           stock: result.data.company.symbol,
           chart: result.data.chart,
           comments: "",
-          query:"",
+          query: ""
         });
         console.log(this.state.query, `Search Success`);
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
-        return api
-          .post(`/api/search`, {
-            symbol: this.state.stock,
-            companyName: this.state.data.company.companyName,
-            logo: this.state.data.logo.url,
-            visitor: this.state.user,
-            earnings: this.state.data.earnings.earnings
-          })
-          .then(results =>
-            // console.log(`here i should see comments?`,results)
-            this.setState({
-              comments: results
+        return (
+          api
+            .post(`/api/search`, {
+              symbol: this.state.stock,
+              companyName: this.state.data.company.companyName,
+              logo: this.state.data.logo.url,
+              visitor: this.state.user,
+              earnings: this.state.data.earnings.earnings
             })
-          );
-      })
-      .then(result => {
-        console.log(`what is here?`,result)// do something here with api result
+            // .then(results =>
+            //   // console.log(`here i should see comments?`,results)
+            //   );
+            .then(result => {
+              // console.log(`what is here?`,result)// do something here with api result
+              this.setState({
+                comments: result
+              });
+              this.props.history.push("/chart")
+            })
+        );
         // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
         // this._setUser()
       })
@@ -250,14 +255,14 @@ As a hobby investor the creator of this site may or may not have standing positi
         `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,stats,news,chart&range=1m&last=10`
       )
       .then(result => {
-        console.log(result.data);
+        // console.log(result.data);
         // localStorage.setItem( "thing", JSON.stringify(result.data))
         this.setState({
           data: result.data,
           stock: result.data.company.symbol,
           chart: result.data.chart
         });
-        console.log(this.state.data.company.companyName, `abcSearch Success`);
+        console.log(this.state.data.company.companyName, `refreshHandle Success`);
       })
       .catch(err => console.log(err));
   }
@@ -289,7 +294,7 @@ As a hobby investor the creator of this site may or may not have standing positi
   }
 
   _commentPost() {
-    console.log(`commentPost Fired`,this.state.query);
+    console.log(`commentPost Fired`, this.state.comment);
     api
       .post(`/api/comment`, {
         comment: this.state.comment,
@@ -302,7 +307,7 @@ As a hobby investor the creator of this site may or may not have standing positi
           comments: result,
           comment: ""
         });
-        console.log(`state after commentPost`,this.state.comments)
+        console.log(`state after commentPost`, this.state.comments);
       })
       .catch(err => {
         console.log(err);
@@ -310,4 +315,4 @@ As a hobby investor the creator of this site may or may not have standing positi
   }
 }
 
-export default Application;
+export default withRouter(Application);
