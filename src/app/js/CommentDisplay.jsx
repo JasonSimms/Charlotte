@@ -14,16 +14,21 @@ const ComDisplay = props => {
     let commentArr = props.comments;
     // console.log(commentArr)
     const mappedComs = commentArr.map((el, i) => {
-      return <li key={i}>{el.author} writes: {el.comment}</li>;
+      // return <li key={i}>{el.author} writes: {el.comment}</li>;
+      return <div key={i} className="comcard">
+      <p className="msg">{el.comment}</p>
+      <p className="author">shared by: {el.author} </p>
+      </div>;
+
     }
   );
     return (
       <div>
-        <div className="cardbox">
           <h2>
             Community Ideas!
           </h2>
-          <ul>{mappedComs}</ul>
+        <div className="cardbox">
+          {mappedComs}
         </div>
       </div>
     );
