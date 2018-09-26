@@ -61,7 +61,7 @@ class Application extends React.Component {
   render() {
     return (
       
-        <React.Fragment className="app">
+        <div className="app">
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={true}>
             This website uses cookies to enhance the user experience.<br/><br/> Financial
@@ -152,7 +152,7 @@ class Application extends React.Component {
             <Route component={NotFound} />
           </Switch>
           <Footer />
-        </React.Fragment>
+        </div>
     );
   }
 

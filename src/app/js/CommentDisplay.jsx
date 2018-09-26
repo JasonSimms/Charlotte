@@ -23,7 +23,7 @@ const ComDisplay = props => {
     }
   );
     return (
-      <div>
+      <div className="container">
           <h2>
             Community Ideas!
           </h2>
