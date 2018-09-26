@@ -64,7 +64,7 @@ class Application extends React.Component {
         <div className="app">
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={true}>
-            This website uses cookies to enhance the user experience. Financial
+            This website uses cookies to enhance the user experience.<br/><br/> Financial
             Disclaimer : All information found here including
             predictions,view,commentary, & suggestions are for informational and
             entertainment purposes only and should not be viewed as investment

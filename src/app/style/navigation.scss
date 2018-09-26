@@ -1,52 +1,81 @@
 .navigation {
-    background-color: $navBar;
+  background-color: $navBar;
 }
 
 .nav-content {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-link {
+  color: $navLink;
+
+  &:visited {
     color: $navLink;
+  }
 
-    &:visited {
-        color: $navLink;
-    }
-
-    &:hover {
-        color: $navLink;
-    }
+  &:hover {
+    color: $navLink;
+  }
 }
 .footer {
-    background-color: $footerColor;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 0 20px;
-    // position: absolute;
-    width: 100%;
-    bottom: 0;
-    position: relative;
-    z-index: 350;
+  background-color: $footerColor;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0 20px;
+  width: 100%;
+  bottom: 0;
+  z-index: 350;
 }
 
-.searchBar{
-        background-color: $searchBar;
-        // overflow: hidden;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+.searchBar {
+    padding: 10px 3vw;
+    background-color: $searchBar;
+  // overflow: hidden;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.search{
+    display:flex;
+    align-items: center;
+}
+
+.searchBar button {
+  background-color: $searchButtons;
+  border-radius: 5px;
+}
+
+.linkicon {
+  border-radius: 5px;
+  height: 5vh;
 }
 
 .search-link {
+  color: $searchLink;
+
+  &:visited {
     color: $searchLink;
+  }
 
-    &:visited {
-        color: $searchLink;
-    }
-
-    &:hover {
-        color: $searchLink;
-    }
+  &:hover {
+    color: $searchLink;
+  }
 }
+
+.go {
+  margin-left: 0.3vh;
+  background-color:grey;
+  border-radius: 5px;
+  height: 5vh;
+}
+
+// .charts{
+// }
