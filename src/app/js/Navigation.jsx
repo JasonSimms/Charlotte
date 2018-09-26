@@ -10,18 +10,6 @@ const Navigation = props => {
                         Home
                     </Link>
                     &nbsp; &nbsp; &nbsp;
-                    <Link className="link nav-link" to={`/chart/`}>
-                             Charts
-                            </Link>
-                            &nbsp; &nbsp; &nbsp;
-                    <Link className="link nav-link" to={`/trends/`}>
-                             Trends
-                            </Link>
-                            &nbsp; &nbsp; &nbsp;
-
-                            <Link className="link nav-link" to={`/roboadvisor/${props.stock}`}>
-                             Advisor
-                            </Link>
                     {props.user && (
                         <span>
                             &nbsp; &nbsp; &nbsp;

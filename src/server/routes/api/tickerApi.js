@@ -11,7 +11,6 @@ router.use(userMiddleware)
 
 router.post('/', (req, res) => {
     const { symbol } = req.body
-    console.log(`tick here: `,req.body.symbol)
     Ticker.findOneAndUpdate({ symbol }, {$inc:{visits: 1}, earnings:req.body.earnings, $addToSet:{visitors: req.body.visitor}})
     .then(existingTicker => {
         if(!existingTicker)return new Ticker(req.body).save()

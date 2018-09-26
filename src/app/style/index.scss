@@ -19,6 +19,12 @@ $color5: rgba(238, 240, 235, 1);
 
 $primary-color: $color2;
 $secondary-color: $color3;
+$navBar: $color3;
+$searchBar: $color2;
+$navLink: $color5;
+$searchLink: $color5;
+$footerColor: $color3;
+$newsCard: white;
 
 @import './base.scss';
 @import './components.scss';
