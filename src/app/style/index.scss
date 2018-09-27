@@ -28,35 +28,63 @@ $newsCard: white;
 $searchButtons: green;
 $goButton: red;
 
-@import './base.scss';
-@import './components.scss';
-@import './navigation.scss';
-@import './cards.scss';
-@import './cards2.scss';
-@import './comcards.scss';
-@import './findata.scss';
+@import "./base.scss";
+@import "./components.scss";
+@import "./navigation.scss";
+@import "./cards.scss";
+@import "./cards2.scss";
+@import "./comcards.scss";
+@import "./findata.scss";
 
-
-
-
-
-body{
-    background-color: $color1;
+body {
+  background-color: $color1;
 }
 
-.generic{
-    display: flex;
-    flex-flow: column;
-    padding: 25px 5vw;
-    margin: auto;
+.home {
+  display: flex;
+  flex-flow: column;
+  padding: 25px 5vw;
+  margin: auto;
+  // background-image: url("/home/star/Ironhack/Charlotte/src/server/public/investor.jpg")
+  // background-color: orange;
+  background-image: url("../../server/public/investor.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 90vh;
+  background-position-y: 50%;
+  @media (max-width: 900px) {
+    background-size: contain;
+  }
 }
 
-.generic > img{
+.home > img {
+  position: absolute;
+  top: 200px;
+  right: 400px;
+  margin: auto;
+  width: 300px;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.greeting {
+    background-color: beige;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5vh;
+    width: 80vw;
     position: absolute;
-    top: 200px;
-    right: 400px;
-    margin: auto;
-    width: 300px;
-    z-index: -1;
-    opacity: 0.8;
+    right: 5%;
+}
+
+.greeting2 {
+    background-color: beige;
+    padding: 10px;
+    border-radius: 25px;
+    width: 20vw;
+    height: 9vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35vh;
 }

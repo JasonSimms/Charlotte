@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
      Ticker.findOneAndUpdate({symbol:req.body.stock}, 
         {$push:{comments: {
             "author": req.body.author,
-            "comment": req.body.comment}}})
+            "comment": req.body.comment}}},{new: true})
             .then(result => 
                 res.send(result.comments)
                 )
