@@ -21,10 +21,7 @@ const Chart = props => {
   let mappedPeers = "none";
   if (props.data == "") {
     return <div>LOADING...</div>;
-  } else {
-    console.log(peers)
-  
-    
+  } else {  
     if(peers){mappedPeers = peers.map((el,i) => {return <span key={i}> {el} </span>})}
     let googleURL = `https://www.google.de/search?q=next+earnings+date+of+${quoteData.symbol}`
     let NextEarningsDate = <a href={googleURL} target="_blank">Next Earnings Date</a>
@@ -40,7 +37,7 @@ const Chart = props => {
               <td>Open:  {quoteData.open}</td>
             </tr>
             <tr>
-              <td>Change: {quoteData.open}</td>
+              <td>Change: {quoteData.changePercent*100} %</td>
               <td>Low / Hi : {quoteData.low}/ {quoteData.high}</td>
             </tr>
             <tr>

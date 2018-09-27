@@ -4,6 +4,8 @@ const router = express.Router()
 const Ticker = require('../../models/Ticker')
 const { userMiddleware } = require('../../utils/middleware')
 
+const Axios =require('axios')
+
 
 
 router.use(userMiddleware)
@@ -18,6 +20,24 @@ router.post('/', (req, res) => {
         // console.log(`existing ticker:`,existingTicker.comments)
     })
     console.log('apipost complete',req.body.symbol)
+    // res.send({
+    //     existingTicker
+    // //     info,
+    // //     token: generateUserToken()
+    // })
+})
+
+router.post('/options', (req, res) => {
+    let x = req.body.symbol
+    Axios.get(`https://query1.finance.yahoo.com/v7/finance/options/${x}`).then(
+        data =>{
+            // console.log(data.data.optionChain,`options data here`)
+            res.send(data.data.optionChain.result[0])
+        }
+    )
+    console.log('options search complete',
+    // req.body.symbol
+    )
     // res.send({
     //     existingTicker
     // //     info,

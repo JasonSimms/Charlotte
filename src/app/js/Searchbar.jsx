@@ -13,7 +13,7 @@ const Searchbar = props => {
           }
           type="text"
           placeholder="Symbol"
-          autofocus="true"
+          autoFocus={true}
         />
 
         {/* <button className="go" onClick={props.searchItems} value="$"> */}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PromiseProvider } from "mongoose";
 import api from "./utils/api";
 
-const Trends = props => {
+const Trends = props => {  
   if (props.data == "") {
     return <div>LOADING...</div>;
   } else {
