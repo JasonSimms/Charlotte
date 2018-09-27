@@ -10,6 +10,7 @@ body {
     font-family: 'Rokkitt', serif;
     font-size: 16px;
     color: $text-color;
+    min-height: 100vh;
 }
 
 .container {
@@ -22,4 +23,5 @@ body {
 
 a{
     text-decoration: none;
+    color: $link;
 }

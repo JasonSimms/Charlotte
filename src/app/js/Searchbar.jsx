@@ -5,7 +5,7 @@ const Searchbar = props => {
   return (
     <div className="searchBar">
       <form className="search" onSubmit={props.searchItems}>
-        <input
+        <input 
           className="input"
           value={props.query}
           onChange={event =>
@@ -13,7 +13,7 @@ const Searchbar = props => {
           }
           type="text"
           placeholder="Symbol"
-          
+          autoFocus={true}
         />
 
         {/* <button className="go" onClick={props.searchItems} value="$"> */}

@@ -27,6 +27,7 @@ class Application extends React.Component {
     super(props);
 
     this.state = {
+      options: "no options",
       user: this._setUser(true),
       query: "",
       stock: "spy",
@@ -48,6 +49,9 @@ class Application extends React.Component {
     this._refreshHandle = this._refreshHandle.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._commentPost = this._commentPost.bind(this);
+
+    this._searchOptions = this._searchOptions.bind(this);
+    this._unixDateAdj = this._unixDateAdj.bind(this)
   }
 
   componentDidMount() {
@@ -60,100 +64,101 @@ class Application extends React.Component {
 
   render() {
     return (
-      
-        <div className="app">
-          {/* Remove Debug!!!! on production */}
-          <CookieConsent debug={false}>
-            <h3>This website uses cookies to enhance the user experience.</h3>
-              <br/> 
-            <h3>Financial Disclaimer : </h3>All information found here including
-            predictions,view,commentary, & suggestions are for informational and
-            entertainment purposes only and should not be viewed as investment
-            advice. I am not a licensed financial advisor. I am not responsible
-            for any investment actions which are a result of your use of this
-            site. All financial investments carry risk, before engaging in such
-            activities consider these as described by your broker and be
-            prepared to loose some or all capital investment As a hobby investor
-            the creator of this site may or may not have standing positions in
-            many business you will see here.
-          </CookieConsent>
-          <Navigation user={this.state.user} stock={this.state.stock} />
-          <Searchbar
-            query={this.state.query}
-            handleSearchChange={this._handleSearchChange}
-            handleInputChange={this._handleInputChange}
-            searchItems={this._searchItems}
-            stock={this.state.stock}
-          />
-          <Switch>
-            <Route
-              path="/chart"
-              render={() => (
-                <React.Fragment>
-                  <Chart
-                    stock={this.state.stock}
-                    data={this.state.data}
-                    refresh={this._refreshHandle}
-                  />
-                  <FinData stock={this.state.stock} data={this.state.data} />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              path="/trends"
-              render={() => (
-                <React.Fragment>
-                  <ComDisplay
-                    comments={this.state.comments}
-                    findComments={this._setComments}
-                  />
-                  <Comments
-                    handleInputChange={this._handleInputChange}
-                    comment={this.state.comment}
-                    stock={this.state.stock}
-                    displayname={this.state.user}
-                    commentPost={this._commentPost}
-                  />
-                  <Trends
-                    stock={this.state.stock}
-                    data={this.state.data}
-                    initStock={this._initStock}
-                    refresh={this._refreshHandle}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              path="/roboadvisor"
-              render={() => (
-                <Advisor
+      <div className="app">
+        {/* Remove Debug!!!! on production */}
+        <CookieConsent debug={false}>
+          <h3>This website uses cookies to enhance the user experience.</h3>
+          <br />
+          <h3>Financial Disclaimer : </h3>
+          All information found here including predictions,view,commentary, &
+          suggestions are for informational and entertainment purposes only and
+          should not be viewed as investment advice. I am not a licensed
+          financial advisor. I am not responsible for any investment actions
+          which are a result of your use of this site. All financial investments
+          carry risk, before engaging in such activities consider these as
+          described by your broker and be prepared to loose some or all capital
+          investment As a hobby investor the creator of this site may or may not
+          have standing positions in many business you will see here.
+        </CookieConsent>
+        <Navigation user={this.state.user} stock={this.state.stock} />
+        <Searchbar
+          query={this.state.query}
+          handleSearchChange={this._handleSearchChange}
+          handleInputChange={this._handleInputChange}
+          searchItems={this._searchItems}
+          stock={this.state.stock}
+        />
+        <Switch>
+          <Route
+            path="/chart"
+            render={() => (
+              <React.Fragment>
+                <Chart
                   stock={this.state.stock}
                   data={this.state.data}
                   refresh={this._refreshHandle}
                 />
-              )}
-            />
-            <Route
-              exact
-              path="/"
-              render={() => <Home user={this.state.user} />}
-            />
-            <Route exact path="/about" render={() => <About />} />
-            <Route
-              exact
-              path="/profile"
-              render={() => <Profile user={this.state.user} />}
-            />
-            <Route
-              path="/auth"
-              render={() => (
-                <Auth setUser={this._setUser} resetUser={this._resetUser} />
-              )}
-            />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
-        </div>
+                <FinData stock={this.state.stock} data={this.state.data} />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path="/trends"
+            render={() => (
+              <React.Fragment>
+                <ComDisplay
+                  comments={this.state.comments}
+                  findComments={this._setComments}
+                />
+                <Comments
+                  handleInputChange={this._handleInputChange}
+                  comment={this.state.comment}
+                  stock={this.state.stock}
+                  displayname={this.state.user}
+                  commentPost={this._commentPost}
+                />
+                <Trends
+                  stock={this.state.stock}
+                  data={this.state.data}
+                  initStock={this._initStock}
+                  refresh={this._refreshHandle}
+                />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path="/roboadvisor"
+            render={() => (
+              <Advisor
+                options={this.state.options}
+                stock={this.state.stock}
+                data={this.state.data}
+                refresh={this._refreshHandle}
+                searchO={this._searchOptions}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => <Home user={this.state.user} />}
+          />
+          <Route exact path="/about" render={() => <About />} />
+          <Route
+            exact
+            path="/profile"
+            render={() => <Profile user={this.state.user} />}
+          />
+          <Route
+            path="/auth"
+            render={() => (
+              <Auth setUser={this._setUser} resetUser={this._resetUser} />
+            )}
+          />
+          <Route component={NotFound} />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 
@@ -207,7 +212,7 @@ class Application extends React.Component {
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
-        this.props.history.push("/chart")
+        this.props.history.push("/chart");
         return (
           api
             .post(`/api/search`, {
@@ -249,7 +254,10 @@ class Application extends React.Component {
           stock: result.data.company.symbol,
           chart: result.data.chart
         });
-        console.log(this.state.data.company.companyName, `refreshHandle Success`);
+        console.log(
+          this.state.data.company.companyName,
+          `refreshHandle Success`
+        );
       })
       .catch(err => console.log(err));
   }
@@ -299,6 +307,30 @@ class Application extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  _searchOptions() {
+    let y = "none";
+    y = this.state.stock;
+    console.log(`search options fired for `, y);
+
+    return api
+      .post(`/api/search/options`, {
+        symbol: y
+      })
+      .then(result => {
+        console.log(`what is here?`,result)// do something here with api result
+        // this.setState({
+        //   options: result
+        // })
+        // this._unixDateAdj(result)
+      })
+      .catch(err => console.log(err));
+  }
+  _unixDateAdj(arg){
+    let dateArr = arg.expirationDates
+    let dateArr2 = dateArr.map(el => new Date(el*1000).toString().slice(0,10))
+    console.log(dateArr2)
   }
 }
 
