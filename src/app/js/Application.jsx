@@ -27,7 +27,7 @@ class Application extends React.Component {
     super(props);
 
     this.state = {
-      options: "no options",
+      options: undefined,
       user: this._setUser(true),
       query: "",
       stock: "aapl",
