@@ -57,14 +57,14 @@ const Chart = props => {
               yAxisId="price"
               type="monotone"
               dataKey="close"
-              stroke="#8884d8"
+              stroke="black"
             />
-            <Area yAxisId="vol" dataKey="volume" fill="#413ea0" />
+            <Area yAxisId="vol" dataKey="volume" fill="gunmetal" />
             <Bar
               yAxisId="delta"
               dataKey="changePercent"
               barSize={10}
-              fill="#413ea0"
+              fill="rgba(51, 77, 80, 1)"
             />
 
             {/* <Line type="monotone" dataKey="volume" stroke="#8884d8" /> */}

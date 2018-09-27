@@ -1,5 +1,5 @@
 .databox{
-    background-color: white;
+    // background-color: white;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
@@ -20,7 +20,7 @@
 .datacard{
     flex-grow: 1;
     padding: 5px 10px;
-    background-color: peachpuff;
+    background-color: $findata;
     border: 1px solid grey;
 }
 
@@ -32,5 +32,11 @@ table{
 
 th, td{
     border: 1px solid black;
+
+}
+
+svg{
+    background-color:$finchart;
+    border-radius:5px;
 
 }

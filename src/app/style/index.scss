@@ -1,32 +1,39 @@
-// $primary-color: #63adf2;
-// $secondary-color: #ff686b;
-$text-color: #333;
-$grey: rgb(200, 200, 200);
+// Import Color Pallette First!
+// @import "./artichoke.scss";
+@import "./greyrose.scss";
 
-// /* HSL */
-// $color1: hsla(78%, 8%, 70%, 1);
-// $color2: hsla(202%, 52%, 17%, 1);
-// $color3: hsla(204%, 42%, 27%, 1);
-// $color4: hsla(79%, 57%, 95%, 1);
-// $color5: hsla(84%, 14%, 93%, 1);
+// Declare Misc. Extra Colors
+// $text-color: #333;
+$text-color: black;
 
-/* RGB */
-$color1: rgba(180, 184, 171, 1);
-$color2: rgba(21, 50, 67, 1);
-$color3: rgba(40, 75, 99, 1);
-$color4: rgba(244, 249, 233, 1);
-$color5: rgba(238, 240, 235, 1);
+// $grey: rgb(200, 200, 200);
 
-$primary-color: $color2;
-$secondary-color: $color3;
-$navBar: $color3;
-$searchBar: $color2;
-$navLink: $color5;
+/* Manual COLOR SCHEME */
+// $color1: #e8ffed;
+// $color2: #a7f9ba;
+// $color3: #71ed90;
+// $color4: #4cd575;
+// $color5: #33b061;
+// $color6: #22824c;
+$grey: rgb(96, 97, 81);
+
+
+$primary-color: $color3;
+$secondary-color: $color2;
+$accent-color: $color5;
+$navBar: $color5;
+$searchBar: $grey;
+$navLink: $color3;
 $searchLink: $color5;
-$footerColor: $color3;
+$footerColor: $grey;
 $newsCard: white;
-$searchButtons: green;
-$goButton: red;
+$searchButtons: white;
+$go: $color4;
+$background: $accent-color;
+$findata: $color2;
+$greetings : $color3;
+$link: $color1;
+$finchart: $color2;
 
 @import "./base.scss";
 @import "./components.scss";
@@ -37,7 +44,10 @@ $goButton: red;
 @import "./findata.scss";
 
 body {
-  background-color: $color1;
+  background: #334d50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #cbcaa5, #334d50) no-repeat;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #cbcaa5, #334d50) no-repeat;  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 
 .home {
@@ -69,22 +79,22 @@ body {
 }
 
 .greeting {
-    background-color: beige;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 5vh;
-    width: 80vw;
-    position: absolute;
-    right: 5%;
+  background-color: $greetings;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5vh;
+  width: 80vw;
+  position: absolute;
+  right: 5%;
 }
 
 .greeting2 {
-    background-color: beige;
-    padding: 10px;
-    border-radius: 25px;
-    width: 20vw;
-    height: 9vh;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 35vh;
+  background-color: $greetings;
+  padding: 10px;
+  border-radius: 25px;
+  width: 20vw;
+  height: 9vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 35vh;
 }
