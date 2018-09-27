@@ -64,8 +64,9 @@ class Application extends React.Component {
         <div className="app">
           {/* Remove Debug!!!! on production */}
           <CookieConsent debug={false}>
-            This website uses cookies to enhance the user experience.<br/><br/> Financial
-            Disclaimer : All information found here including
+            <h3>This website uses cookies to enhance the user experience.</h3>
+              <br/> 
+            <h3>Financial Disclaimer : </h3>All information found here including
             predictions,view,commentary, & suggestions are for informational and
             entertainment purposes only and should not be viewed as investment
             advice. I am not a licensed financial advisor. I am not responsible
@@ -206,6 +207,7 @@ class Application extends React.Component {
 
         //COULD RENDER CHARTS HERE:
         //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
+        this.props.history.push("/chart")
         return (
           api
             .post(`/api/search`, {
@@ -223,7 +225,6 @@ class Application extends React.Component {
               this.setState({
                 comments: result
               });
-              this.props.history.push("/chart")
             })
         );
         // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
