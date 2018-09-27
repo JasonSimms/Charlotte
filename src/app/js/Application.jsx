@@ -63,7 +63,7 @@ class Application extends React.Component {
       
         <div className="app">
           {/* Remove Debug!!!! on production */}
-          <CookieConsent debug={true}>
+          <CookieConsent debug={false}>
             This website uses cookies to enhance the user experience.<br/><br/> Financial
             Disclaimer : All information found here including
             predictions,view,commentary, & suggestions are for informational and
@@ -167,19 +167,6 @@ class Application extends React.Component {
     this.setState({
       comments: this.state.comments.concat(lastcomment)
     });
-    // api
-    //   .post(`/api/comment/update`, {
-    //     stock: this.state.stock
-    //   })
-    //   .then(result => {
-    //     console.log(`setcomments results`,result);
-    //     this.setState({
-    //       comments:result
-    //     })
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   }
 
   _setUser(init) {
@@ -196,7 +183,6 @@ class Application extends React.Component {
 
   _searchItems(event) {
     let x = this.state.query;
-
     event.preventDefault();
 
     axios

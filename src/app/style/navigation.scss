@@ -25,10 +25,16 @@
   flex-direction: row;
   padding: 0 20px;
   width: 100%;
-  bottom: 0;
   z-index: 350;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
 }
 
+.rev{
+  opacity: 0.2 ;
+}
 .searchBar {
     padding: 10px 3vw;
     background-color: $searchBar;
@@ -72,10 +78,7 @@
 
 .go {
   margin-left: 0.3vh;
-  background-color:grey;
-  border-radius: 5px;
+  background-color:chartreuse;
+  border-radius: 10px 20px;
   height: 5vh;
 }
-
-// .charts{
-// }
