@@ -30,7 +30,7 @@ class Application extends React.Component {
       options: "no options",
       user: this._setUser(true),
       query: "",
-      stock: "spy",
+      stock: "aapl",
       data: "",
       test: "",
       chart: "",
@@ -319,10 +319,10 @@ class Application extends React.Component {
         symbol: y
       })
       .then(result => {
-        console.log(`what is here?`,result)// do something here with api result
-        // this.setState({
-        //   options: result
-        // })
+        // console.log(`what is here?`,result)// do something here with api result
+        this.setState({
+          options: result
+        })
         // this._unixDateAdj(result)
       })
       .catch(err => console.log(err));
