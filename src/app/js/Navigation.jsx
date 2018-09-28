@@ -11,7 +11,7 @@ const Navigation = props => {
                     </Link>
                     &nbsp; &nbsp; &nbsp;
                     <Link className="link nav-link" to="/todaysearnings">
-                        Todays Earnings
+                        Earnings
                     </Link>
                     &nbsp; &nbsp; &nbsp;
 
