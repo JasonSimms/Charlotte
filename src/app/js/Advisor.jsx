@@ -16,6 +16,8 @@ class Advisor extends React.Component {
     if (!this.props.earnings) {
       this.props.getEarnings();
     }
+    let demo = true;
+    if(demo && this.props.stock == "PRGS")this.props.demopopulate()
   }
   render() {
     let content, mappedCalls, mappedPuts, today, calls2, puts2;
@@ -83,7 +85,10 @@ class Advisor extends React.Component {
       }
 
       if (this.props.earnings && this.props.earnings && this.props.options) {
-        today = this.props.earnings.bto;
+
+        today = this.props.earnings.amc
+        ;
+
         const mappedtoday = today.map(el => {
           return el.symbol;
         });
@@ -289,6 +294,8 @@ class Advisor extends React.Component {
   _strikeFilter() {
     console.log(`empty function`);
   }
+
+  
 }
 
 export default Advisor;
