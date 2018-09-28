@@ -29,6 +29,7 @@ router.post('/', (req, res) => {
 
 router.post('/options', (req, res) => {
     let x = req.body.symbol
+    console.log(`options searching for`,x)
     Axios.get(`https://query1.finance.yahoo.com/v7/finance/options/${x}`).then(
         data =>{
             // console.log(data.data.optionChain,`options data here`)

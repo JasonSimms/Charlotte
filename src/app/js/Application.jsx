@@ -19,6 +19,8 @@ import Advisor from "./Advisor";
 import Comments from "./commentForm";
 import ComDisplay from "./CommentDisplay";
 import FinData from "./FinData";
+import Earnings from "./Earnings";
+
 
 import CookieConsent from "react-cookie-consent";
 
@@ -27,16 +29,17 @@ class Application extends React.Component {
     super(props);
 
     this.state = {
-      options: "no options",
+      options: undefined,
       user: this._setUser(true),
       query: "",
-      stock: "spy",
+      stock: "SPY",
       data: "",
       test: "",
       chart: "",
       comment: "",
       comments: "",
-      displayname: this._setUser(true)
+      displayname: this._setUser(true),
+      earnings: undefined
     };
 
     this._setUser = this._setUser.bind(this);
@@ -51,7 +54,8 @@ class Application extends React.Component {
     this._commentPost = this._commentPost.bind(this);
 
     this._searchOptions = this._searchOptions.bind(this);
-    this._unixDateAdj = this._unixDateAdj.bind(this)
+    this._unixDateAdj = this._unixDateAdj.bind(this);
+    this._getEarnings = this._getEarnings.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +63,6 @@ class Application extends React.Component {
     if (this.state.data == "") {
       this._refreshHandle();
     }
-    // this._setComments();
   }
 
   render() {
@@ -135,6 +138,8 @@ class Application extends React.Component {
                 data={this.state.data}
                 refresh={this._refreshHandle}
                 searchO={this._searchOptions}
+                earnings={this.state.earnings}
+              getEarnings={this._getEarnings} 
               />
             )}
           />
@@ -142,6 +147,14 @@ class Application extends React.Component {
             exact
             path="/"
             render={() => <Home user={this.state.user} />}
+          />
+          <Route
+            exact
+            path="/todaysearnings"
+            render={() => <Earnings 
+              earnings={this.state.earnings}
+              getEarnings={this._getEarnings} 
+              />}
           />
           <Route exact path="/about" render={() => <About />} />
           <Route
@@ -244,8 +257,8 @@ class Application extends React.Component {
     // event.preventDefault();
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,quote,peers,stats,news,chart&range=1m&last=10`
-      )
+        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,stats,earnings,quote,news,chart&range=1m&last=10`      
+        )
       .then(result => {
         // console.log(result.data);
         // localStorage.setItem( "thing", JSON.stringify(result.data))
@@ -319,19 +332,35 @@ class Application extends React.Component {
         symbol: y
       })
       .then(result => {
-        console.log(`what is here?`,result)// do something here with api result
-        // this.setState({
-        //   options: result
-        // })
+        // console.log(`what is here?`,result)// do something here with api result
+        this.setState({
+          options: result
+        });
         // this._unixDateAdj(result)
       })
       .catch(err => console.log(err));
   }
-  _unixDateAdj(arg){
-    let dateArr = arg.expirationDates
-    let dateArr2 = dateArr.map(el => new Date(el*1000).toString().slice(0,10))
-    console.log(dateArr2)
+  _unixDateAdj(arg) {
+    let dateArr = arg.expirationDates;
+    let dateArr2 = dateArr.map(el =>
+      new Date(el * 1000).toString().slice(0, 10)
+    );
+    console.log(dateArr2);
   }
+
+  _getEarnings(){
+    console.log(`get earnings fired`)
+    axios.get("https://api.iextrading.com/1.0/stock/market/today-earnings")
+    .then(result => {
+      // console.log(result.data, `get results`)
+      this.setState({
+        earnings: result.data
+      })
+    }
+      
+    )
+  }
+
 }
 
 export default withRouter(Application);

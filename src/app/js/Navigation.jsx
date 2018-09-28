@@ -10,6 +10,11 @@ const Navigation = props => {
                         Home
                     </Link>
                     &nbsp; &nbsp; &nbsp;
+                    <Link className="link nav-link" to="/todaysearnings">
+                        Todays Earnings
+                    </Link>
+                    &nbsp; &nbsp; &nbsp;
+
                     {props.user && (
                         <span>
                             &nbsp; &nbsp; &nbsp;
