@@ -85,8 +85,10 @@ class Advisor extends React.Component {
       }
 
       if (this.props.earnings && this.props.earnings && this.props.options) {
+
         today = this.props.earnings.amc
         ;
+
         const mappedtoday = today.map(el => {
           return el.symbol;
         });
