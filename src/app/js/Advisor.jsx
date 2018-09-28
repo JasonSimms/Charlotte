@@ -28,7 +28,7 @@ class Advisor extends React.Component {
     let earner = false;
     //OPTIONS INFO?
     if (this.props.options) {
-      // console.log(this.props, `props @ advisor`);
+      console.log(this.props, `props @ advisor`);
       //Buildan earnings card if its included
 
       // Display Earnings Date
