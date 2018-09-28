@@ -22,19 +22,31 @@ const Chart = props => {
   if (props.data == "") {
     return <div>LOADING...</div>;
   } else {  
+    // console.log(props)
+    // let styles = {
+    //   backgroundImage: `url(${props.data.logo.url})`,
+    //   backgroundSize: 'contain',
+    //   backgroundRepeat  : 'no-repeat',    
+    // }
     if(peers){mappedPeers = peers.map((el,i) => {return <span key={i}> {el} </span>})}
     let googleURL = `https://www.google.de/search?q=next+earnings+date+of+${quoteData.symbol}`
     let NextEarningsDate = <a href={googleURL} target="_blank">Next Earnings Date</a>
+
     return (
       <div className="container">
         <h5>
          
-          <table>
+          <table className="fintable"
+          //  style={styles}
+           >
+            <tbody>
+
             <tr>
               <th rowspan="2"> 
           {quoteData.companyName}</th>
               <td>Latest:  {quoteData.latestPrice}</td>
               <td>Open:  {quoteData.open}</td>
+              <td rowSpan="3"> <img src={props.data.logo.url} alt="Logo"/></td>
             </tr>
             <tr>
               <td>Change: {quoteData.changePercent*100} %</td>
@@ -46,6 +58,7 @@ const Chart = props => {
               <td> {NextEarningsDate}  </td>
 
             </tr>
+            </tbody>
           </table>
         </h5>
         <ResponsiveContainer width="100%" height={400}>
