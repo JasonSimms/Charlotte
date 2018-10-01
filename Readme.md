@@ -10,7 +10,9 @@ Mobile friendly delivery of only the most popular financial indicators you need 
 ### How to Use:
 Visitors can type any valid Stock Symbol into the search bar and brought instantly to the price performance for the last 30 days and a view of some key stats relating to this company.
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](
+      Charlotte/src/server/public/appimages/chart1.png
+    )
 
 In the "News" tab, visitors can see a few of the latest articles relating to their stock of interest as well as any community messages by visitors to the page.
 
