@@ -44,3 +44,6 @@ Serverside events:
 ..* Earnings Data is stored on each query server side for later analysis.
 
 
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/Package.png)
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/dependencies.png)
+
