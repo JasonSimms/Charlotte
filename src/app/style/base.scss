@@ -1,5 +1,6 @@
 // @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Rokkitt');
+@import url('https://fonts.googleapis.com/css?family=KoHo');
 
 * {
     box-sizing: border-box;
@@ -7,7 +8,9 @@
 
 body {
     margin: 0;
-    font-family: 'Rokkitt', serif;
+    // font-family: 'Rokkitt', serif;
+    font-family: 'KoHo', sans-serif;
+
     font-size: 16px;
     color: $text-color;
     min-height: 100vh;

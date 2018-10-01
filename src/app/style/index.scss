@@ -1,5 +1,6 @@
 // Import Color Pallette First!
-@import "./artichoke.scss";
+// @import "./artichoke.scss";
+
 // @import "./greyrose.scss";
 
 // Declare Misc. Extra Colors
@@ -9,31 +10,33 @@ $text-color: black;
 // $grey: rgb(200, 200, 200);
 
 /* Manual COLOR SCHEME */
-// $color1: #e8ffed;
-// $color2: #a7f9ba;
-// $color3: #71ed90;
-// $color4: #4cd575;
-// $color5: #33b061;
-// $color6: #22824c;
+
+$color1: #d4ffcc;
+$color2: #91f57f;
+$color3: #5cda46;
+$color4: #37a625;
+$color5: #1b5c11;
+$color6: #f0f7ef;
+
 $grey: rgb(96, 97, 81);
 
 
 $primary-color: $color3;
 $secondary-color: $color2;
 $accent-color: $color5;
-$navBar: $color5;
-$searchBar: $grey;
+$navBar: $grey;
+$searchBar: $color5;
 $navLink: $color3;
 $searchLink: $color5;
 $footerColor: $grey;
-$newsCard: white;
-$searchButtons: white;
+$newsCard: $color6;
+$searchButtons: $color6;
 $go: $color4;
 $background: $accent-color;
-$findata: $color2;
+$findata: $color6;
 $greetings : $color3;
 $link: $color1;
-$finchart: $color2;
+$finchart: $color6;
 
 @import "./base.scss";
 @import "./components.scss";
@@ -44,9 +47,9 @@ $finchart: $color2;
 @import "./findata.scss";
 
 body {
-  background: #334d50;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #cbcaa5, #334d50) no-repeat;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #cbcaa5, #334d50) no-repeat;  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: $color6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, $color6, $color2) no-repeat;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, $color6, $color2) no-repeat;  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   
 }
 
