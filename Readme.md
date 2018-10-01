@@ -11,18 +11,18 @@ Mobile friendly delivery of only the most popular financial indicators you need 
 Visitors can type any valid Stock Symbol into the search bar and brought instantly to the price performance for the last 30 days and a view of some key stats relating to this company.
 
 ![alt text](
-      Charlotte/src/server/public/appimages/chart1.png
+    https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/chart1.png
     )
 
 In the "News" tab, visitors can see a few of the latest articles relating to their stock of interest as well as any community messages by visitors to the page.
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/News1.png)
 
 
 In the "Advisor" tab, an AI will evaluate several performance charactertics of a stock and return an outlook.
 Also included are current options prices and open interest.
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/Advisor.png)
 
 
 
