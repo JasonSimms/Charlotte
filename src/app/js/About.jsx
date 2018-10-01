@@ -61,10 +61,10 @@ const About = props => {
           </ul>
         </div>
         <a target="_blank" href="https://github.com/JasonSimms/Charlotte">
-          <img src="/githubicon.png" alt="Github" height="30px" />
+          <img src="/githubicon.png" alt="Github" height="150px" />
         </a>
       </div>
-      <div className="about-div">
+      <div className="about-div container">
         <h3>Team:</h3>
         <br />
         <div className="blog-card">
@@ -113,7 +113,7 @@ const About = props => {
               <br />
             </p>
             <p className="read-more">
-              <a href="https://www.linkedin.com/in/viviansarazin/">Read More</a>
+              <a href="https://www.linkedin.com/in/viviansarazin/">Linkedin</a>
             </p>
           </div>
         </div>
@@ -152,23 +152,32 @@ const About = props => {
         <div className="row">
           <div className="cards">
             <h4>Recharts </h4>
-            <img src="/recharts.png" alt="yelp" height="80px" />
+            <img src="/recharts.png" alt="yelp" height="150px" />
+            <img src="/appimages/codechart.png" alt="charting code"/>
           </div>
           <div className="cards">
-            <h4>Apify Custom Crawlers</h4>
+            <h4>IEX Trading Financial Data API</h4>
             <img src="/iextradinglogo.png" alt="apify logo" height="80px" />
+            <img src="/appimages/codeiexcall.png" alt="iex code"/>
+
           </div>
           <div className="cards">
             <h4>Mongoose MongoDB JS and of course NodeJs</h4>
             <img
               src="/mongoose-transactions.png"
-              height="80px"
+              height="120px"
               alt="mongoose"
             />
+            <img src="/appimages/codecomment.png" alt="iex code"/>
+            <img src="/appimages/codecomment2.png" alt="iex code"/>
+
+
           </div>
           <div className="cards">
-            <h4>Postman</h4>
-            <img src="/reactlogo.png" height="80px" alt="mongoose" />
+            <h4>React</h4>
+            <img src="/reactlogo.png" height="120px" alt="mongoose" />
+            <img src="/appimages/codereact.png" alt="iex code"/>
+
           </div>
         </div>
       </div>

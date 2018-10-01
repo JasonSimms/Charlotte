@@ -21,7 +21,6 @@ import ComDisplay from "./CommentDisplay";
 import FinData from "./FinData";
 import Earnings from "./Earnings";
 
-
 import CookieConsent from "react-cookie-consent";
 
 class Application extends React.Component {
@@ -56,7 +55,7 @@ class Application extends React.Component {
     this._searchOptions = this._searchOptions.bind(this);
     this._unixDateAdj = this._unixDateAdj.bind(this);
     this._getEarnings = this._getEarnings.bind(this);
-    this._demopopulate = this._demopopulate.bind(this)
+    this._demopopulate = this._demopopulate.bind(this);
   }
 
   componentDidMount() {
@@ -140,8 +139,8 @@ class Application extends React.Component {
                 refresh={this._refreshHandle}
                 searchO={this._searchOptions}
                 earnings={this.state.earnings}
-              getEarnings={this._getEarnings}
-              demopopulate={this._demopopulate} 
+                getEarnings={this._getEarnings}
+                demopopulate={this._demopopulate}
               />
             )}
           />
@@ -153,10 +152,12 @@ class Application extends React.Component {
           <Route
             exact
             path="/todaysearnings"
-            render={() => <Earnings 
-              earnings={this.state.earnings}
-              getEarnings={this._getEarnings} 
-              />}
+            render={() => (
+              <Earnings
+                earnings={this.state.earnings}
+                getEarnings={this._getEarnings}
+              />
+            )}
           />
           <Route exact path="/about" render={() => <About />} />
           <Route
@@ -208,7 +209,7 @@ class Application extends React.Component {
 
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,stats,earnings,quote,news,chart&range=1m&last=10`
+        `https://api.iextrading.com/1.0/stock/${x}/batch?types=company,logo,peers,stats,earnings,quote,news,chart&range=1m&last=10`
       )
       .then(result => {
         // console.log(result.data);
@@ -224,29 +225,21 @@ class Application extends React.Component {
           query: ""
         });
         console.log(this.state.query, `Search Success`);
-
-        //COULD RENDER CHARTS HERE:
-        //HOW TO PUT IN A REDIRECT TO CHARTS? redirect("/chart")
+        //Redirect to Chart component
         this.props.history.push("/chart");
-        return (
-          api
-            .post(`/api/search`, {
-              symbol: this.state.stock,
-              companyName: this.state.data.company.companyName,
-              logo: this.state.data.logo.url,
-              visitor: this.state.user,
-              earnings: this.state.data.earnings.earnings
-            })
-            // .then(results =>
-            //   // console.log(`here i should see comments?`,results)
-            //   );
-            .then(result => {
-              // console.log(`what is here?`,result)// do something here with api result
-              this.setState({
-                comments: result
-              });
-            })
-        );
+        return api
+          .post(`/api/search`, {
+            symbol: this.state.stock,
+            companyName: this.state.data.company.companyName,
+            logo: this.state.data.logo.url,
+            visitor: this.state.user,
+            earnings: this.state.data.earnings.earnings
+          })
+          .then(result => {
+            this.setState({
+              comments: result
+            });
+          });
         // if we have result.token --> localStorage.setItem("identity", result.token) (if we have updated the user)
         // this._setUser()
       })
@@ -259,8 +252,8 @@ class Application extends React.Component {
     // event.preventDefault();
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,stats,earnings,quote,news,chart&range=1m&last=10`      
-        )
+        `https://api.iextrading.com/1.0/stock/${theLocal}/batch?types=company,logo,peers,stats,earnings,quote,news,chart&range=1m&last=10`
+      )
       .then(result => {
         // console.log(result.data);
         // localStorage.setItem( "thing", JSON.stringify(result.data))
@@ -286,7 +279,7 @@ class Application extends React.Component {
   _initStock(z) {
     axios
       .get(
-        `https://api.iextrading.com/1.0/stock/${z}/batch?types=company,logo,news`
+        `https://api.iextrading.com/1.0/stock/${z}/batch?types=company,logo,peers,stats,earnings,quote,news,chart&range=1m&last=10`
       )
       .then(result => {
         this.setState({
@@ -304,7 +297,6 @@ class Application extends React.Component {
   }
 
   _commentPost() {
-    console.log(`commentPost Fired`, this.state.comment);
     api
       .post(`/api/comment`, {
         comment: this.state.comment,
@@ -312,12 +304,10 @@ class Application extends React.Component {
         stock: this.state.stock
       })
       .then(result => {
-        // console.log(`result is`,result)
         this.setState({
           comments: result,
           comment: ""
         });
-        console.log(`state after commentPost`, this.state.comments);
       })
       .catch(err => {
         console.log(err);
@@ -350,85 +340,84 @@ class Application extends React.Component {
     console.log(dateArr2);
   }
 
-  _getEarnings(){
-    console.log(`get earnings fired`)
-    axios.get("https://api.iextrading.com/1.0/stock/market/today-earnings")
-    .then(result => {
-      // console.log(result.data, `get results`)
-      this.setState({
-        earnings: result.data
-      })
-    }
-      
-    )
+  _getEarnings() {
+    console.log(`get earnings fired`);
+    axios
+      .get("https://api.iextrading.com/1.0/stock/market/today-earnings")
+      .then(result => {
+        // console.log(result.data, `get results`)
+        this.setState({
+          earnings: result.data
+        });
+      });
   }
 
-  _demopopulate(){
-const demoinfo = {
-  bto: [
-  {
-
-    actualEPS: 0.24,
-    consensusEPS: 0.21,
-    estimatedEPS: 0.21,
-    announceTime: "AMC",
-    numberOfEstimates: 4,
-    EPSSurpriseDollar: 0.03,
-    EPSReportDate: "2018-09-27",
-    fiscalPeriod: "Q2 2019",
-    fiscalEndDate: "2018-08-31",
-    yearAgo: 0.23,
-    yearAgoChangePercent: 0.04347826086956513,
-    estimatedChangePercent: -0.0869565217391305,
-    symbolId: 1043,
-    quote: {
-      symbol: "MTN",
-      companyName: "Vail Resorts Inc.",
-      primaryExchange: "New York Stock Exchange",
-      sector: "Consumer Cyclical",
-      calculationPrice: "close",
-      open: 288.56,
-      openTime: 1538055000402,
-      close: 286.13,
-      closeTime: 1538078523482,
-      high: 288.68,
-      low: 284.7,
-      latestPrice: 286.13,
-      latestSource: "Close",
-      latestTime: "September 27, 2018",
-      latestUpdate: 1538078523482,
-      latestVolume: 367648,
-      iexRealtimePrice: null,
-      iexRealtimeSize: null,
-      iexLastUpdated: null,
-      delayedPrice: 286.13,
-      delayedPriceTime: 1538078523482,
-      extendedPrice: 276.15,
-      extendedChange: -9.98,
-      extendedChangePercent: -0.03488,
-      extendedPriceTime: 1538081874633,
-      previousClose: 288.71,
-      change: -2.58,
-      changePercent: -0.00894,
-      iexMarketPercent: null,
-      iexVolume: null,
-      avgTotalVolume: 273083,
-      iexBidPrice: null,
-      iexBidSize: null,
-      iexAskPrice: null,
-      iexAskSize: null,
-      marketCap: 11537698962,
-      peRatio: 51.74,
-      week52High: 302.76,
-      week52Low: 200.68,
-      ytdChange: 0.3669906153578343
-      },
-      headline: "Vail Resorts beats by $0.18, misses on revenue"
-  }]
-}
-this.setState({
-  earnings: demoinfo
-})
+  _demopopulate() {
+    const demoinfo = {
+      bto: [
+        {
+          actualEPS: 0.24,
+          consensusEPS: 0.21,
+          estimatedEPS: 0.21,
+          announceTime: "AMC",
+          numberOfEstimates: 4,
+          EPSSurpriseDollar: 0.03,
+          EPSReportDate: "2018-09-27",
+          fiscalPeriod: "Q2 2019",
+          fiscalEndDate: "2018-08-31",
+          yearAgo: 0.23,
+          yearAgoChangePercent: 0.04347826086956513,
+          estimatedChangePercent: -0.0869565217391305,
+          symbolId: 1043,
+          quote: {
+            symbol: "MTN",
+            companyName: "Vail Resorts Inc.",
+            primaryExchange: "New York Stock Exchange",
+            sector: "Consumer Cyclical",
+            calculationPrice: "close",
+            open: 288.56,
+            openTime: 1538055000402,
+            close: 286.13,
+            closeTime: 1538078523482,
+            high: 288.68,
+            low: 284.7,
+            latestPrice: 286.13,
+            latestSource: "Close",
+            latestTime: "September 27, 2018",
+            latestUpdate: 1538078523482,
+            latestVolume: 367648,
+            iexRealtimePrice: null,
+            iexRealtimeSize: null,
+            iexLastUpdated: null,
+            delayedPrice: 286.13,
+            delayedPriceTime: 1538078523482,
+            extendedPrice: 276.15,
+            extendedChange: -9.98,
+            extendedChangePercent: -0.03488,
+            extendedPriceTime: 1538081874633,
+            previousClose: 288.71,
+            change: -2.58,
+            changePercent: -0.00894,
+            iexMarketPercent: null,
+            iexVolume: null,
+            avgTotalVolume: 273083,
+            iexBidPrice: null,
+            iexBidSize: null,
+            iexAskPrice: null,
+            iexAskSize: null,
+            marketCap: 11537698962,
+            peRatio: 51.74,
+            week52High: 302.76,
+            week52Low: 200.68,
+            ytdChange: 0.3669906153578343
+          },
+          headline: "Vail Resorts beats by $0.18, misses on revenue"
+        }
+      ]
+    };
+    this.setState({
+      earnings: demoinfo
+    });
   }
   // actualEPS: "",
   // consensusEPS: -2.31,
@@ -488,11 +477,6 @@ this.setState({
   // },
   // headline: "Vail Resorts beats by $0.18, misses on revenue"
   // }
-
-
-    
-  
-
 }
 
 export default withRouter(Application);

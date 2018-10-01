@@ -10,7 +10,7 @@ const Footer = () => {
                     </Link>
                         </p>
                     <p className="nav-link">“Data provided for free by <a href="https://iextrading.com/developer" >IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.”
-                    <span className="rev">  &nbsp;&nbsp;  v~0.9.1 </span>
+                    {/* <span className="rev">  &nbsp;&nbsp;  v~0.9.1 </span> */}
                     </p>
         </div>
     );

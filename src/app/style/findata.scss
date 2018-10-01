@@ -22,11 +22,14 @@
     padding: 5px 10px;
     background-color: $findata;
     border: 1px solid grey;
+    // tr:nth-child(odd) {background: #FFF}
 }
+.datacard:nth-child(even) {background: #CCC}
 
 table{
     width: 100%;
-    border: 1px solid black;
+    // border: 1px solid black;
+    border:none;
     border-collapse: collapse;
 }
 
@@ -39,4 +42,12 @@ svg{
     background-color:$finchart;
     border-radius:5px;
 
+}
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #FFF}
+
+tr{
+    text-align: center;
+  vertical-align: middle;
 }

@@ -1,6 +1,6 @@
-# Project Charlotte
+# Project Market Aware
 ### Installation:
-visit the live version on Heroku @ https://marketaware.herokuapp.com
+visit the live version on Heroku @ [Market Aware](https://marketaware.herokuapp.com "Live on Heroku")
 
 or clone this repository , cd/charlotte npm install , npm run dev will initiate the parcel bundler and a local running MongoDB is also required.
 
@@ -39,10 +39,11 @@ The users last query is stored in local storage to be used in the case of any pa
 When the "Advisor" tab is selected, further Financial data concerning options and earnings is retrieved and add to a client side calculator returning an evalutation on price momentum of this stock."
 
 Serverside events: 
-All search history is tracked by users and added to each stock symbol for use in displaying visitor interests.
-Comments are appended to each 'Ticker' Model as well and available only when logged in.
-Earnings Data is stored on each query server side for later analysis.
+..* All search history is tracked by users and added to each stock symbol for use in displaying visitor interests.
+..* Comments are appended to each 'Ticker' Model as well and available only when logged in.
+..* Earnings Data is stored on each query server side for later analysis.
 
 
-D.0 = 17.09.2018
-### ANOTHER LINE?
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/package.png)
+![alt text](https://github.com/JasonSimms/Charlotte/blob/production/src/server/public/appimages/dependencies.png)
+
