@@ -296,7 +296,7 @@ this.state = {
       content = "something bad";
     }
     // console.log(this.props)
-    return <div>{optionsContent}</div>;
+    return <div className="container">{optionsContent}</div>;
   }
 
   _strikeFilter() {

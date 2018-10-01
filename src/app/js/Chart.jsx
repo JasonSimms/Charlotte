@@ -15,49 +15,62 @@ import {
 } from "recharts";
 
 const Chart = props => {
+  console.log("chart props....",props)
   let chartData = props.data.chart;
   let quoteData = props.data.quote;
-  let peers=props.data.peers;
+  let peers = props.data.peers;
   let mappedPeers = "none";
   if (props.data == "") {
     return <div>LOADING...</div>;
-  } else {  
-    // console.log(props)
-    // let styles = {
-    //   backgroundImage: `url(${props.data.logo.url})`,
-    //   backgroundSize: 'contain',
-    //   backgroundRepeat  : 'no-repeat',    
-    // }
-    if(peers){mappedPeers = peers.map((el,i) => {return <span key={i}> {el} </span>})}
-    let googleURL = `https://www.google.de/search?q=next+earnings+date+of+${quoteData.symbol}`
-    let NextEarningsDate = <a href={googleURL} target="_blank">Next Earnings Date</a>
+  } else {
+    if (peers) {
+      mappedPeers = peers.map((el, i) => {
+        return <span key={i}> {el} </span>;
+      });
+    }
+    let googleURL = `https://www.google.de/search?q=next+earnings+date+of+${
+      quoteData.symbol
+    }`;
+    let NextEarningsDate = (
+      <a className="earnlink" href={googleURL} target="_blank">
+        Search: Next Earnings Date?
+      </a>
+    );
 
     return (
       <div className="container">
         <h5>
-         
-          <table className="fintable"
-          //  style={styles}
-           >
+          <table className="fintable">
             <tbody>
+              <tr>
+                <th rowSpan="2">
+                  {" "}
+                  <h2>{quoteData.companyName}</h2>
+                </th>
+                <td>
+                  <h2>
 
-            <tr>
-              <th rowSpan="2"> 
-          {quoteData.companyName}</th>
-              <td>Latest:  {quoteData.latestPrice}</td>
-              <td>Open:  {quoteData.open}</td>
-              <td rowSpan="3"> <img src={props.data.logo.url} alt="Logo"/></td>
-            </tr>
-            <tr>
-              <td>Change: {quoteData.changePercent*100} %</td>
-              <td>Low / Hi : {quoteData.low}/ {quoteData.high}</td>
-            </tr>
-            <tr>
-              <th >{quoteData.sector}</th>
-              <td>Peers: {mappedPeers}</td>
-              <td> {NextEarningsDate}  </td>
-
-            </tr>
+                  Latest: {quoteData.latestPrice}
+                  </h2>
+                  
+                  </td>
+                <td>Open: {quoteData.open}</td>
+                <td rowSpan="3">
+                  {" "}
+                  <img src={props.data.logo.url} alt="Logo" />
+                </td>
+              </tr>
+              <tr>
+                <td>Change: {quoteData.changePercent * 100} %</td>
+                <td>
+                  Low / Hi : {quoteData.low}/ {quoteData.high}
+                </td>
+              </tr>
+              <tr>
+                <th>{quoteData.sector}</th>
+                <td>Peers: {mappedPeers}</td>
+                <td> {NextEarningsDate} </td>
+              </tr>
             </tbody>
           </table>
         </h5>
@@ -98,7 +111,6 @@ const Chart = props => {
             <Tooltip />
           </ComposedChart>
         </ResponsiveContainer>
-        {/* <img src={props.data.logo.url} alt="" /> */}
       </div>
     );
   }

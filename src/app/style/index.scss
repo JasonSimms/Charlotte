@@ -38,6 +38,10 @@ $greetings : $color3;
 $link: $color1;
 $finchart: $color6;
 
+.earnlink{
+  color: black !important;
+}
+
 @import "./base.scss";
 @import "./components.scss";
 @import "./navigation.scss";

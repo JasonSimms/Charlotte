@@ -1,7 +1,14 @@
 .navigation {
   background-color: $navBar;
-  height: 6vh;
-  padding: 2.5vh 5vw;
+  // background-image: linear-gradient(120deg, $navBar 0%, white 100%);
+  height: 7vh;
+  padding-top: 1vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
+
+  min-height: 20px;
+
+
 }
 
 .nav-content {
@@ -25,15 +32,20 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  padding: 0 20px;
+  padding: 1vw 2vw;
+
   width: 100%;
   z-index: 350;
-  position: fixed;
+  // position: fixed;
   left: 0;
   bottom: 0;
   text-align: center;
   height: 3.5vh;
   align-items: center;
+  min-height: 20px;
+  @media (max-width: 450px) {
+    height: 7vh;
+}
 }
 
 .rev{
@@ -42,6 +54,8 @@
 .searchBar {
     padding: 10px 3vw;
     background-color: $searchBar;
+  background-image: linear-gradient(120deg, $searchBar 0%, $color4 100%);
+
   // overflow: hidden;
   position: -webkit-sticky;
   position: sticky;
@@ -82,8 +96,9 @@
 }
 
 .go {
+  border:$color5 2px solid;
   margin-left: 0.3vh;
-  background-color:$go;
+  background-color:grey;
   border-radius: 10px 20px;
   height: 5vh;
   padding: 0.3vw 0.3vw;
