@@ -4,7 +4,12 @@ class Advisor extends React.Component {
   constructor(props) {
     super(props);
 
-    this._strikeFilter = this._strikeFilter.bind(this);
+this.state = {
+
+  loading: false
+}
+
+  this._strikeFilter = this._strikeFilter.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +34,7 @@ class Advisor extends React.Component {
     let outlook = "The Algo cannot always see the future.";
     let earner = false;
     //OPTIONS INFO?
+
     if (this.props.options) {
       console.log(this.props, `props @ advisor`);
       //Buildan earnings card if its included
@@ -51,6 +57,7 @@ class Advisor extends React.Component {
         let step =
           this.props.options.options[0].calls[1].strike -
           this.props.options.options[0].calls[0].strike;
+          console.log(step)
         let span = 6 * step;
         calls2 = this.props.options.options[0].calls.filter(
           el => el.strike < current + span && el.strike > current - span
@@ -184,14 +191,14 @@ class Advisor extends React.Component {
 
       if (fiftyavg > twohundavg && bid > fiftyavg) {
         avgMomentum =
-          "This stock is a buy! It shows a healthy rise over time and currently poised to continue it's climb!";
+          "Momentum Advisor Says: This stock is a buy! It shows a healthy rise over time and currently poised to continue it's climb!";
       } else if (fiftyavg > twohundavg && bid < fiftyavg) {
         avgMomentum =
-          "Stay Away! Unless you know something... this business shows terrible momentum over the short and long term.";
+          "Momentum Advisor Says: Stay Away! Unless you know something... this business shows terrible momentum over the short and long term.";
       }
       let part1 = [
         `i like it`,
-        `maybe you should buy it with Haakons SingleCoin?`,
+        `Robo Advisor Evaluation = #2`,
         `i dont like it`
       ];
       let score = 1;
@@ -280,6 +287,7 @@ class Advisor extends React.Component {
           <br />
         </div>
       );
+      // END OF WRAPPED LOGIC
     }
 
     if (1 > 0) {

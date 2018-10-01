@@ -42,7 +42,7 @@ const Chart = props => {
             <tbody>
 
             <tr>
-              <th rowspan="2"> 
+              <th rowSpan="2"> 
           {quoteData.companyName}</th>
               <td>Latest:  {quoteData.latestPrice}</td>
               <td>Open:  {quoteData.open}</td>
