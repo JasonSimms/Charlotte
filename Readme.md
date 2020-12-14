@@ -1,6 +1,7 @@
 # Project Market Aware
+## Deprecated awaiting new Rev.
 ### Installation:
-visit the live version on Heroku @ [Market Aware](https://marketaware.herokuapp.com "Live on Heroku")
+<!-- visit the live version on Heroku @ [Market Aware](https://marketaware.herokuapp.com "Live on Heroku") -->
 
 or clone this repository , cd/charlotte npm install , npm run dev will initiate the parcel bundler and a local running MongoDB is also required.
 
